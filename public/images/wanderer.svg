@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <defs>
+    <linearGradient id="fog" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8a9aab"/>
+      <stop offset="50%" stop-color="#b8c4ce"/>
+      <stop offset="100%" stop-color="#4a5560"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="4"/>
+      <feBlend in="SourceGraphic" mode="overlay"/>
+    </filter>
+  </defs>
+  <rect width="800" height="800" fill="url(#fog)"/>
+  <path d="M0 500 Q200 420 400 480 T800 450 L800 800 L0 800 Z" fill="#3d4852" opacity="0.8"/>
+  <path d="M0 580 Q300 520 800 560 L800 800 L0 800 Z" fill="#2a3238"/>
+  <rect x="360" y="220" width="80" height="200" rx="8" fill="#1a1410"/>
+  <ellipse cx="400" cy="200" rx="36" ry="40" fill="#2a2420"/>
+  <rect width="800" height="800" filter="url(#grain)" opacity="0.15"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c4a574"/>
+      <stop offset="100%" stop-color="#8b6914"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3"/>
+      <feBlend in="SourceGraphic" mode="multiply"/>
+    </filter>
+  </defs>
+  <rect width="800" height="800" fill="#e8dcc8"/>
+  <rect x="0" y="500" width="800" height="300" fill="url(#wall)"/>
+  <path d="M100 500 Q200 350 350 420 Q500 300 700 380 L700 500 Z" fill="#6a8090" opacity="0.5"/>
+  <circle cx="200" cy="280" r="60" fill="#4a3828"/>
+  <circle cx="400" cy="260" r="55" fill="#3d3020"/>
+  <circle cx="600" cy="290" r="58" fill="#453528"/>
+  <rect x="150" y="120" width="500" height="380" fill="none" stroke="#5c4a30" stroke-width="16" rx="240"/>
+  <rect width="800" height="800" filter="url(#grain)" opacity="0.12"/>
+</svg>

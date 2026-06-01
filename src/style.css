@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100%;
+  }
+
+  body {
+    @apply text-black font-sans min-h-screen;
+    background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 45%, #e6e6e6 100%);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .blog-shell {
+    box-sizing: border-box;
+    min-height: 100vh;
+    padding-left: 39%;
+    padding-right: 39%;
+  }
+
+  .blog-page {
+    @apply flex flex-col gap-2 py-4;
+  }
+
+  .card-white {
+    @apply bg-white p-5;
+  }
+
+  .card-entry {
+    @apply bg-white p-5 flex gap-4 items-start transition-opacity hover:opacity-95 relative;
+  }
+
+  .card-entry-media {
+    @apply w-[72px] aspect-square flex-shrink-0 overflow-hidden bg-neutral-100
+      absolute top-5 right-5;
+  }
+
+  .card-entry-body {
+    @apply flex-1 min-w-0 pr-[calc(72px+1.25rem)];
+  }
+
+  .intro-block {
+    @apply pt-5 pr-5 pb-5;
+  }
+
+  .intro-avatar {
+    @apply mb-5;
+  }
+
+  .card-entry-title {
+    @apply font-normal text-black leading-[1.35] line-clamp-2;
+  }
+
+  .tag-pill {
+    @apply inline-block bg-[#ebebeb] text-[#888888] text-[13px] px-3.5 py-1.5;
+  }
+
+  .section-divider {
+    @apply border-t border-neutral-200 my-6;
+  }
+
+  .icon-btn {
+    @apply w-10 h-10 bg-[#ebebeb] flex items-center justify-center text-neutral-500
+      hover:bg-[#e0e0e0] transition-colors flex-shrink-0;
+  }
+
+  .post-content h2 {
+    @apply text-xl font-bold mt-10 mb-4 text-black tracking-tight;
+  }
+
+  .post-content h2:first-child {
+    @apply mt-0;
+  }
+
+  .post-content p {
+    @apply text-base leading-[1.85] text-neutral-700 mb-5;
+  }
+
+  .post-content ul,
+  .post-content ol {
+    @apply pl-6 mb-5 space-y-2;
+  }
+
+  .post-content li {
+    @apply text-base leading-[1.85] text-neutral-700;
+  }
+
+  .post-content blockquote {
+    @apply border-l-2 border-black pl-5 my-6 text-neutral-600 italic text-[15px] leading-relaxed;
+  }
+
+  .post-content pre {
+    @apply bg-neutral-50 p-5 overflow-x-auto mb-6 text-sm border border-neutral-200 leading-relaxed;
+  }
+
+  .post-content code {
+    @apply bg-neutral-100 px-1.5 py-0.5 text-[0.9em] font-mono text-black;
+  }
+
+  .post-content pre code {
+    @apply bg-transparent p-0 text-neutral-800 border-0;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-shell {
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+}
