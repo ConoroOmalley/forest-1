@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/sync-notion.mjs && vite build",
     "preview": "vite preview",
     "sync:notion": "node scripts/sync-notion.mjs"
   },

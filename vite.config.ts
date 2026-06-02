@@ -20,9 +20,6 @@ function notionSyncPlugin() {
 
   return {
     name: 'notion-sync',
-    async buildStart() {
-      await runSync()
-    },
     configureServer(server) {
       runSync()
 

@@ -1,5 +1,5 @@
 import { Client } from '@notionhq/client'
-import { readFileSync, writeFileSync, mkdirSync, createWriteStream } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, createWriteStream, existsSync } from 'node:fs'
 import { resolve, dirname, extname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
@@ -8,15 +8,32 @@ import { pipeline } from 'node:stream/promises'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const notionImagesDir = resolve(__dirname, '../public/images/notion')
 
+/** 优先读 process.env（Vercel 注入），本地可回退到 .env 文件 */
 function loadEnv() {
+  const fileEnv = {}
   const envPath = resolve(__dirname, '../.env')
-  return Object.fromEntries(
-    readFileSync(envPath, 'utf8')
-      .split('\n')
-      .filter((l) => l && !l.startsWith('#'))
-      .map((l) => l.split('='))
-      .map(([k, ...v]) => [k.trim(), v.join('=').trim()])
-  )
+
+  if (existsSync(envPath)) {
+    for (const line of readFileSync(envPath, 'utf8').split('\n')) {
+      if (!line || line.startsWith('#')) continue
+      const idx = line.indexOf('=')
+      if (idx === -1) continue
+      fileEnv[line.slice(0, idx).trim()] = line.slice(idx + 1).trim()
+    }
+  }
+
+  const NOTION_TOKEN = process.env.NOTION_TOKEN || fileEnv.NOTION_TOKEN
+  const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID || fileEnv.NOTION_DATABASE_ID
+
+  if (!NOTION_TOKEN || !NOTION_DATABASE_ID) {
+    throw new Error(
+      '缺少 Notion 配置：请设置 NOTION_TOKEN 和 NOTION_DATABASE_ID。\n' +
+        '本地：复制 .env.example 为 .env 并填入；\n' +
+        'Vercel：Project Settings → Environment Variables 中添加这两个变量。'
+    )
+  }
+
+  return { NOTION_TOKEN, NOTION_DATABASE_ID }
 }
 
 function richTextToPlain(richText = []) {
