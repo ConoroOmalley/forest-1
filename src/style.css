@@ -70,11 +70,21 @@
       hover:bg-[#e0e0e0] transition-colors flex-shrink-0;
   }
 
+  .post-content h1 {
+    @apply text-2xl font-bold mt-10 mb-4 text-black tracking-tight;
+  }
+
   .post-content h2 {
     @apply text-xl font-bold mt-10 mb-4 text-black tracking-tight;
   }
 
-  .post-content h2:first-child {
+  .post-content h3 {
+    @apply text-lg font-bold mt-8 mb-3 text-black tracking-tight;
+  }
+
+  .post-content h1:first-child,
+  .post-content h2:first-child,
+  .post-content h3:first-child {
     @apply mt-0;
   }
 
@@ -105,6 +115,14 @@
 
   .post-content pre code {
     @apply bg-transparent p-0 text-neutral-800 border-0;
+  }
+
+  .post-content .notion-image {
+    @apply my-6;
+  }
+
+  .post-content .notion-image img {
+    @apply w-full h-auto;
   }
 }
 

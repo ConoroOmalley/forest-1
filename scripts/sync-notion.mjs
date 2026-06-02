@@ -1,0 +1,269 @@
+import { Client } from '@notionhq/client'
+import { readFileSync, writeFileSync, mkdirSync, createWriteStream } from 'node:fs'
+import { resolve, dirname, extname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { createHash } from 'node:crypto'
+import { pipeline } from 'node:stream/promises'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const notionImagesDir = resolve(__dirname, '../public/images/notion')
+
+function loadEnv() {
+  const envPath = resolve(__dirname, '../.env')
+  return Object.fromEntries(
+    readFileSync(envPath, 'utf8')
+      .split('\n')
+      .filter((l) => l && !l.startsWith('#'))
+      .map((l) => l.split('='))
+      .map(([k, ...v]) => [k.trim(), v.join('=').trim()])
+  )
+}
+
+function richTextToPlain(richText = []) {
+  return richText.map((item) => item.plain_text).join('')
+}
+
+function richTextToHtml(richText = []) {
+  return richText
+    .map((item) => {
+      let text = item.plain_text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+      if (item.annotations?.code) text = `<code>${text}</code>`
+      if (item.annotations?.bold) text = `<strong>${text}</strong>`
+      if (item.annotations?.italic) text = `<em>${text}</em>`
+      if (item.href) text = `<a href="${item.href}" target="_blank" rel="noopener">${text}</a>`
+      return text
+    })
+    .join('')
+}
+
+async function fetchAllBlocks(notion, blockId) {
+  const blocks = []
+  let cursor
+  do {
+    const res = await notion.blocks.children.list({
+      block_id: blockId,
+      start_cursor: cursor,
+      page_size: 100,
+    })
+    blocks.push(...res.results)
+    cursor = res.has_more ? res.next_cursor : undefined
+  } while (cursor)
+  return blocks
+}
+
+async function downloadImage(url) {
+  mkdirSync(notionImagesDir, { recursive: true })
+  const hash = createHash('md5').update(url.split('?')[0]).digest('hex').slice(0, 12)
+  let ext = '.jpg'
+  try {
+    const pathname = new URL(url).pathname
+    const fromPath = extname(pathname)
+    if (fromPath) ext = fromPath
+  } catch {
+    // ignore
+  }
+  const filename = `${hash}${ext}`
+  const localPath = `/images/notion/${filename}`
+  const filePath = resolve(notionImagesDir, filename)
+
+  try {
+    readFileSync(filePath)
+    return localPath
+  } catch {
+    // not cached yet
+  }
+
+  const res = await fetch(url)
+  if (!res.ok) throw new Error(`Failed to download image: ${res.status}`)
+  await pipeline(res.body, createWriteStream(filePath))
+  return localPath
+}
+
+async function localizeImages(html) {
+  const imgRegex = /<img src="([^"]+)"/g
+  let result = html
+  const matches = [...html.matchAll(imgRegex)]
+  for (const match of matches) {
+    const remoteUrl = match[1]
+    if (!remoteUrl.startsWith('http')) continue
+    try {
+      const localPath = await downloadImage(remoteUrl)
+      result = result.replace(remoteUrl, localPath)
+    } catch (err) {
+      console.warn('[notion-sync] image download failed:', err.message)
+    }
+  }
+  return result
+}
+
+async function blocksToHtml(notion, blocks) {
+  const parts = []
+
+  for (const block of blocks) {
+    const type = block.type
+    const data = block[type]
+    if (!data) continue
+
+    switch (type) {
+      case 'paragraph': {
+        const html = richTextToHtml(data.rich_text)
+        if (html) parts.push(`<p>${html}</p>`)
+        break
+      }
+      case 'heading_1':
+        parts.push(`<h1>${richTextToHtml(data.rich_text)}</h1>`)
+        break
+      case 'heading_2':
+        parts.push(`<h2>${richTextToHtml(data.rich_text)}</h2>`)
+        break
+      case 'heading_3':
+        parts.push(`<h3>${richTextToHtml(data.rich_text)}</h3>`)
+        break
+      case 'quote':
+        parts.push(`<blockquote>${richTextToHtml(data.rich_text)}</blockquote>`)
+        break
+      case 'bulleted_list_item':
+        parts.push(`<ul><li>${richTextToHtml(data.rich_text)}</li></ul>`)
+        break
+      case 'numbered_list_item':
+        parts.push(`<ol><li>${richTextToHtml(data.rich_text)}</li></ol>`)
+        break
+      case 'code':
+        parts.push(`<pre><code>${richTextToPlain(data.rich_text)}</code></pre>`)
+        break
+      case 'divider':
+        parts.push('<hr />')
+        break
+      case 'callout':
+        parts.push(`<blockquote class="callout">${richTextToHtml(data.rich_text)}</blockquote>`)
+        break
+      case 'image': {
+        const url = data.file?.url || data.external?.url
+        if (url) {
+          const alt = richTextToPlain(data.caption) || 'image'
+          parts.push(`<figure class="notion-image"><img src="${url}" alt="${alt}" loading="lazy" /></figure>`)
+        }
+        break
+      }
+      case 'synced_block':
+      case 'column_list':
+      case 'column':
+        if (block.has_children) {
+          const children = await fetchAllBlocks(notion, block.id)
+          parts.push(await blocksToHtml(notion, children))
+        }
+        break
+      default:
+        if (block.has_children) {
+          const children = await fetchAllBlocks(notion, block.id)
+          parts.push(await blocksToHtml(notion, children))
+        }
+        break
+    }
+  }
+
+  return parts.join('\n')
+}
+
+function slugify(text) {
+  return text
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w\u4e00-\u9fff-]+/g, '')
+    .slice(0, 60)
+}
+
+function mapPageToEntry(page, contentHtml) {
+  const p = page.properties
+
+  const type = p.type?.select?.name ?? 'Post'
+  const title = richTextToPlain(p.title?.title)
+  const summary = richTextToPlain(p.summary?.rich_text)
+  const status = p.status?.select?.name ?? 'Draft'
+  const category = p.category?.select?.name ? [p.category.select.name] : []
+  const tags = (p.tags?.multi_select ?? []).map((t) => t.name)
+  const slugRaw = richTextToPlain(p.slug?.rich_text)
+  const slug = slugRaw || slugify(title) || page.id.replace(/-/g, '')
+  const password = richTextToPlain(p.password?.rich_text) || undefined
+  const icon = richTextToPlain(p.icon?.rich_text) || undefined
+  const dateStart = p.date?.date?.start ?? page.created_time?.slice(0, 10)
+  const date = dateStart.replace(/-/g, '/')
+
+  return {
+    type,
+    title,
+    summary,
+    status,
+    category,
+    tags,
+    slug,
+    date,
+    password,
+    icon,
+    content: contentHtml,
+  }
+}
+
+async function queryAllPages(notion, dataSourceId) {
+  const pages = []
+  let cursor
+  do {
+    const res = await notion.dataSources.query({
+      data_source_id: dataSourceId,
+      start_cursor: cursor,
+      page_size: 100,
+    })
+    pages.push(...res.results.filter((item) => item.object === 'page'))
+    cursor = res.has_more ? res.next_cursor : undefined
+  } while (cursor)
+  return pages
+}
+
+export async function syncNotion() {
+  const env = loadEnv()
+  const notion = new Client({ auth: env.NOTION_TOKEN })
+
+  const db = await notion.databases.retrieve({ database_id: env.NOTION_DATABASE_ID })
+  const dataSourceId = db.data_sources?.[0]?.id
+  if (!dataSourceId) throw new Error('No data source found on database')
+
+  const pages = await queryAllPages(notion, dataSourceId)
+  const entries = []
+
+  for (const page of pages) {
+    const blocks = await fetchAllBlocks(notion, page.id)
+    let content = await blocksToHtml(notion, blocks)
+    content = await localizeImages(content)
+    entries.push(mapPageToEntry(page, content))
+  }
+
+  const blogConfig = {
+    label: richTextToPlain(db.title) || 'Blog',
+    description: richTextToPlain(db.description) || '',
+    avatar: '/images/avatar.png',
+    totalReads: '2.4万',
+  }
+
+  const output = {
+    syncedAt: new Date().toISOString(),
+    blogConfig,
+    entries,
+  }
+
+  const outPath = resolve(__dirname, '../src/data/notion-cache.json')
+  writeFileSync(outPath, JSON.stringify(output, null, 2), 'utf8')
+  console.log(`Synced ${entries.length} entries → ${outPath}`)
+  return output
+}
+
+const isDirectRun = process.argv[1] === fileURLToPath(import.meta.url)
+if (isDirectRun) {
+  syncNotion().catch((err) => {
+    console.error(err)
+    process.exit(1)
+  })
+}

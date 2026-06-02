@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import type { BlogPost } from '@/data/posts'
+import type { NotionEntry } from '@/types/notion'
+import { parseNotionDate } from '@/lib/notion-mapper'
 import PostItem from './PostItem.vue'
 
 const props = defineProps<{
-  posts: BlogPost[]
+  posts: NotionEntry[]
 }>()
 
 type SortOrder = 'asc' | 'desc'
@@ -14,7 +15,7 @@ const sortOrder = ref<SortOrder>('desc')
 const sortedPosts = computed(() => {
   const list = [...props.posts]
   list.sort((a, b) => {
-    const diff = new Date(a.date).getTime() - new Date(b.date).getTime()
+    const diff = parseNotionDate(a.date).getTime() - parseNotionDate(b.date).getTime()
     return sortOrder.value === 'asc' ? diff : -diff
   })
   return list
@@ -38,6 +39,6 @@ function toggleSort() {
       </button>
     </div>
 
-    <PostItem v-for="post in sortedPosts" :key="post.id" :post="post" />
+    <PostItem v-for="post in sortedPosts" :key="post.slug" :post="post" />
   </div>
 </template>

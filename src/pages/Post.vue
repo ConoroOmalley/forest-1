@@ -1,50 +1,15 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getPostById, blogConfig } from '@/data/posts'
+import { getPostBySlug, blogConfig } from '@/data/posts'
+import { formatDateLabel, resolveCardMedia } from '@/lib/notion-mapper'
 
 const route = useRoute()
 const router = useRouter()
 
-const post = computed(() => getPostById(route.params.id as string))
-
-function renderMarkdown(content: string): string {
-  return content
-    .split('\n\n')
-    .map((block) => {
-      if (block.startsWith('## ')) {
-        return `<h2>${block.slice(3)}</h2>`
-      }
-      if (block.startsWith('> ')) {
-        return `<blockquote>${block.slice(2)}</blockquote>`
-      }
-      if (block.startsWith('```')) {
-        const code = block.replace(/```\w*\n?/, '').replace(/```$/, '')
-        return `<pre><code>${code.trim()}</code></pre>`
-      }
-      if (block.match(/^[\d]+\. /m)) {
-        const items = block
-          .split('\n')
-          .map((line) => `<li>${line.replace(/^[\d]+\. /, '')}</li>`)
-          .join('')
-        return `<ol>${items}</ol>`
-      }
-      if (block.startsWith('- ')) {
-        const items = block
-          .split('\n')
-          .map((line) => `<li>${line.slice(2)}</li>`)
-          .join('')
-        return `<ul>${items}</ul>`
-      }
-      return `<p>${block.replace(/`([^`]+)`/g, '<code>$1</code>')}</p>`
-    })
-    .join('')
-}
-
-const htmlContent = computed(() => {
-  if (!post.value) return ''
-  return renderMarkdown(post.value.content)
-})
+const post = computed(() => getPostBySlug(route.params.slug as string))
+const media = computed(() => (post.value ? resolveCardMedia(post.value) : null))
+const dateLabel = computed(() => (post.value ? formatDateLabel(post.value.date) : ''))
 
 function goBack() {
   router.push('/')
@@ -66,20 +31,20 @@ function goBack() {
         {{ post.title }}
       </h1>
 
-      <p class="text-[13px] text-[#aaaaaa] mb-4">{{ post.dateLabel }} · 阅读 {{ blogConfig.totalReads }}</p>
+      <p class="text-[13px] text-[#aaaaaa] mb-4">{{ dateLabel }} · 阅读 {{ blogConfig.totalReads }}</p>
 
       <div
-        v-if="post.cardType === 'image' && post.coverImage"
+        v-if="media?.mode === 'image' && media.coverImage"
         class="aspect-square w-full overflow-hidden mb-5"
       >
         <img
-          :src="post.coverImage"
+          :src="media.coverImage"
           :alt="post.title"
           class="w-full h-full object-cover"
         />
       </div>
 
-      <div class="post-content" v-html="htmlContent" />
+      <div class="post-content" v-html="post.content ?? ''" />
     </section>
   </div>
 
