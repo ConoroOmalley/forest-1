@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import type { NotionEntry } from '@/types/notion'
 import { formatDateLabel, resolveCardMedia } from '@/lib/notion-mapper'
 
@@ -7,8 +7,13 @@ const props = defineProps<{
   post: NotionEntry
 }>()
 
+const imageFailed = ref(false)
 const media = computed(() => resolveCardMedia(props.post))
 const dateLabel = computed(() => formatDateLabel(props.post.date))
+const showImage = computed(
+  () => media.value.mode === 'image' && media.value.coverImage && !imageFailed.value
+)
+const thumbnail = computed(() => media.value.thumbnail || '📄')
 </script>
 
 <template>
@@ -26,23 +31,21 @@ const dateLabel = computed(() => formatDateLabel(props.post.date))
       <span class="text-[12px] font-bold text-black mt-2">{{ dateLabel }}</span>
     </div>
 
-    <!-- 右侧：icon 列 → 封面图或 emoji -->
-    <div
-      v-if="media.mode === 'image' && media.coverImage"
-      class="card-entry-media"
-    >
+    <!-- 右侧：icon / cover → 封面图或 emoji -->
+    <div v-if="showImage" class="card-entry-media">
       <img
         :src="media.coverImage"
         :alt="post.title"
         class="w-full h-full object-cover"
         loading="lazy"
+        @error="imageFailed = true"
       />
     </div>
     <div
       v-else
       class="card-entry-media flex items-center justify-center text-xl text-neutral-400"
     >
-      {{ media.thumbnail }}
+      {{ thumbnail }}
     </div>
   </router-link>
 </template>

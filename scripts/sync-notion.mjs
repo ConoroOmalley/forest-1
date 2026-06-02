@@ -194,33 +194,37 @@ function slugify(text) {
     .slice(0, 60)
 }
 
-function extractFirstImageFromHtml(html) {
-  const match = html.match(/<img src="([^"]+)"/)
-  return match?.[1]
+function findFirstImageUrl(blocks) {
+  for (const block of blocks) {
+    if (block.type === 'image') {
+      return block.image?.external?.url || block.image?.file?.url
+    }
+  }
+  return undefined
+}
+
+/** 外部 URL 直接用于卡片封面；Notion 托管文件则下载到本地 */
+async function resolveIconUrl(url, preferRemote) {
+  if (preferRemote) return url
+  try {
+    return await downloadImage(url)
+  } catch {
+    return url
+  }
 }
 
 /** 卡片封面：icon 列 → 页面 cover → 页面 icon → 正文首图 */
-async function resolveEntryIcon(page, contentHtml, iconColumn) {
+async function resolveEntryIcon(page, blocks, iconColumn) {
   const columnIcon = iconColumn?.trim()
 
   if (columnIcon) {
-    if (columnIcon.startsWith('http')) {
-      try {
-        return await downloadImage(columnIcon)
-      } catch {
-        return columnIcon
-      }
-    }
+    if (columnIcon.startsWith('http')) return columnIcon
     return columnIcon
   }
 
   const coverUrl = page.cover?.external?.url || page.cover?.file?.url
   if (coverUrl) {
-    try {
-      return await downloadImage(coverUrl)
-    } catch {
-      return coverUrl
-    }
+    return resolveIconUrl(coverUrl, page.cover?.type === 'external')
   }
 
   if (page.icon?.type === 'emoji') {
@@ -229,14 +233,16 @@ async function resolveEntryIcon(page, contentHtml, iconColumn) {
 
   const pageIconUrl = page.icon?.external?.url || page.icon?.file?.url
   if (pageIconUrl) {
-    try {
-      return await downloadImage(pageIconUrl)
-    } catch {
-      return pageIconUrl
-    }
+    return resolveIconUrl(pageIconUrl, page.icon?.type === 'external')
   }
 
-  return extractFirstImageFromHtml(contentHtml)
+  const firstImg = findFirstImageUrl(blocks)
+  if (firstImg) {
+    const imageBlock = blocks.find((b) => b.type === 'image')
+    return resolveIconUrl(firstImg, !!imageBlock?.image?.external?.url)
+  }
+
+  return undefined
 }
 
 function mapPageToEntry(page, contentHtml, icon) {
@@ -297,10 +303,10 @@ export async function syncNotion() {
 
   for (const page of pages) {
     const blocks = await fetchAllBlocks(notion, page.id)
+    const iconColumn = richTextToPlain(page.properties?.icon?.rich_text)
+    const icon = await resolveEntryIcon(page, blocks, iconColumn)
     let content = await blocksToHtml(notion, blocks)
     content = await localizeImages(content)
-    const iconColumn = richTextToPlain(page.properties?.icon?.rich_text)
-    const icon = await resolveEntryIcon(page, content, iconColumn)
     entries.push(mapPageToEntry(page, content, icon))
   }
 

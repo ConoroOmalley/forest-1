@@ -7,7 +7,7 @@
     "dev": "vite",
     "notion-sync": "node scripts/sync-notion.mjs",
     "sync:notion": "NOTION_TOKEN=$NOTION_TOKEN NOTION_DATABASE_ID=$NOTION_DATABASE_ID node scripts/sync-notion.mjs",
-    "build": "NOTION_TOKEN=$NOTION_TOKEN NOTION_DATABASE_ID=$NOTION_DATABASE_ID node scripts/sync-notion.mjs && vite build",
+    "build": "NOTION_TOKEN=$NOTION_TOKEN NOTION_DATABASE_ID=$NOTION_DATABASE_ID node scripts/sync-notion.mjs && vite build && node scripts/verify-dist.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
