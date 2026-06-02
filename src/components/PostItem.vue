@@ -18,23 +18,7 @@ defineProps<{
         {{ post.excerpt }}
       </p>
 
-      <div class="flex items-center gap-2 mt-2">
-        <span class="text-[12px] font-bold text-black">{{ post.dateLabel }}</span>
-        <svg
-          class="w-3.5 h-3.5 text-neutral-400"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-          aria-hidden="true"
-        >
-          <path
-            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </div>
+      <span class="text-[12px] font-bold text-black mt-2">{{ post.dateLabel }}</span>
     </div>
 
     <!-- 右侧：图片（上、右间距与卡片 p-5 一致） -->
