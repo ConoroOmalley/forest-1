@@ -18,9 +18,13 @@ export type NotionEntryStatus = 'Published' | 'Invisible' | 'Draft'
  * | slug       | slug       |
  * | date       | date       |
  * | password   | password   |
- * | icon       | icon       |
- *
- * 正文 content 来自 Notion 页面块，不在表格列中。
+/**
+ * icon 列 → 卡片右侧封面，同步时按以下优先级自动填充：
+ * 1. Notion 表格 icon 列（URL 或 emoji）
+ * 2. 页面 Cover（Post Gallery 常用）
+ * 3. 页面 Icon
+ * 4. 正文第一张图片
+ */
  */
 export interface NotionEntry {
   type: NotionEntryType

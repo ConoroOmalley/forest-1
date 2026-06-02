@@ -194,7 +194,52 @@ function slugify(text) {
     .slice(0, 60)
 }
 
-function mapPageToEntry(page, contentHtml) {
+function extractFirstImageFromHtml(html) {
+  const match = html.match(/<img src="([^"]+)"/)
+  return match?.[1]
+}
+
+/** 卡片封面：icon 列 → 页面 cover → 页面 icon → 正文首图 */
+async function resolveEntryIcon(page, contentHtml, iconColumn) {
+  const columnIcon = iconColumn?.trim()
+
+  if (columnIcon) {
+    if (columnIcon.startsWith('http')) {
+      try {
+        return await downloadImage(columnIcon)
+      } catch {
+        return columnIcon
+      }
+    }
+    return columnIcon
+  }
+
+  const coverUrl = page.cover?.external?.url || page.cover?.file?.url
+  if (coverUrl) {
+    try {
+      return await downloadImage(coverUrl)
+    } catch {
+      return coverUrl
+    }
+  }
+
+  if (page.icon?.type === 'emoji') {
+    return page.icon.emoji
+  }
+
+  const pageIconUrl = page.icon?.external?.url || page.icon?.file?.url
+  if (pageIconUrl) {
+    try {
+      return await downloadImage(pageIconUrl)
+    } catch {
+      return pageIconUrl
+    }
+  }
+
+  return extractFirstImageFromHtml(contentHtml)
+}
+
+function mapPageToEntry(page, contentHtml, icon) {
   const p = page.properties
 
   const type = p.type?.select?.name ?? 'Post'
@@ -206,7 +251,6 @@ function mapPageToEntry(page, contentHtml) {
   const slugRaw = richTextToPlain(p.slug?.rich_text)
   const slug = slugRaw || slugify(title) || page.id.replace(/-/g, '')
   const password = richTextToPlain(p.password?.rich_text) || undefined
-  const icon = richTextToPlain(p.icon?.rich_text) || undefined
   const dateStart = p.date?.date?.start ?? page.created_time?.slice(0, 10)
   const date = dateStart.replace(/-/g, '/')
 
@@ -255,7 +299,9 @@ export async function syncNotion() {
     const blocks = await fetchAllBlocks(notion, page.id)
     let content = await blocksToHtml(notion, blocks)
     content = await localizeImages(content)
-    entries.push(mapPageToEntry(page, content))
+    const iconColumn = richTextToPlain(page.properties?.icon?.rich_text)
+    const icon = await resolveEntryIcon(page, content, iconColumn)
+    entries.push(mapPageToEntry(page, content, icon))
   }
 
   const blogConfig = {
