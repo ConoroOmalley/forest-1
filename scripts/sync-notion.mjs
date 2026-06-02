@@ -22,8 +22,8 @@ function loadEnv() {
     }
   }
 
-  const NOTION_TOKEN = process.env.NOTION_TOKEN || fileEnv.NOTION_TOKEN
-  const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID || fileEnv.NOTION_DATABASE_ID
+  const NOTION_TOKEN = (process.env.NOTION_TOKEN || fileEnv.NOTION_TOKEN || '').trim()
+  const NOTION_DATABASE_ID = (process.env.NOTION_DATABASE_ID || fileEnv.NOTION_DATABASE_ID || '').trim()
 
   if (!NOTION_TOKEN || !NOTION_DATABASE_ID) {
     throw new Error(
