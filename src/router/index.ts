@@ -9,6 +9,21 @@ const router = createRouter({
       component: () => import('@/pages/Home.vue'),
     },
     {
+      path: '/articles',
+      name: 'Articles',
+      component: () => import('@/pages/Articles.vue'),
+    },
+    {
+      path: '/courses',
+      name: 'Courses',
+      component: () => import('@/pages/Courses.vue'),
+    },
+    {
+      path: '/photography',
+      name: 'Photography',
+      component: () => import('@/pages/Photography.vue'),
+    },
+    {
       path: '/post/:slug',
       name: 'Post',
       component: () => import('@/pages/Post.vue'),

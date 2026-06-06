@@ -257,10 +257,12 @@ function mapPageToEntry(page, contentHtml, icon) {
   const slugRaw = richTextToPlain(p.slug?.rich_text)
   const slug = slugRaw || slugify(title) || page.id.replace(/-/g, '')
   const password = richTextToPlain(p.password?.rich_text) || undefined
+  const belong = p.belong?.select?.name || undefined
   const dateStart = p.date?.date?.start ?? page.created_time?.slice(0, 10)
   const date = dateStart.replace(/-/g, '/')
 
   return {
+    id: page.id,
     type,
     title,
     summary,
@@ -269,6 +271,7 @@ function mapPageToEntry(page, contentHtml, icon) {
     tags,
     slug,
     date,
+    belong,
     password,
     icon,
     content: contentHtml,
@@ -288,6 +291,23 @@ async function queryAllPages(notion, dataSourceId) {
     cursor = res.has_more ? res.next_cursor : undefined
   } while (cursor)
   return pages
+}
+
+function dedupeSlugs(entries) {
+  const groups = new Map()
+
+  for (const entry of entries) {
+    if (!groups.has(entry.slug)) groups.set(entry.slug, [])
+    groups.get(entry.slug).push(entry)
+  }
+
+  return entries.map((entry) => {
+    const group = groups.get(entry.slug)
+    if (group.length <= 1) return entry
+
+    const shortId = entry.id.replace(/-/g, '').slice(-8)
+    return { ...entry, slug: `${entry.slug}-${shortId}` }
+  })
 }
 
 export async function syncNotion() {
@@ -310,22 +330,39 @@ export async function syncNotion() {
     entries.push(mapPageToEntry(page, content, icon))
   }
 
+  const normalizedEntries = dedupeSlugs(entries)
+
   const blogConfig = {
     label: richTextToPlain(db.title) || 'Blog',
     description: richTextToPlain(db.description) || '',
     avatar: '/images/avatar.png',
     totalReads: '2.4万',
+    navIntro: [
+      [{ kind: 'text', value: '来自互联网的用户体验' }],
+      [{ kind: 'text', value: '产品设计师，喜欢写点' }],
+      [
+        { kind: 'menu', value: '文章' },
+        { kind: 'text', value: '，偶尔拍拍' },
+        { kind: 'menu', value: '摄影' },
+        { kind: 'text', value: '，' },
+      ],
+      [
+        { kind: 'text', value: '最近正在创作' },
+        { kind: 'menu', value: '课程' },
+        { kind: 'text', value: '。' },
+      ],
+    ],
   }
 
   const output = {
     syncedAt: new Date().toISOString(),
     blogConfig,
-    entries,
+    entries: normalizedEntries,
   }
 
   const outPath = resolve(__dirname, '../src/data/notion-cache.json')
   writeFileSync(outPath, JSON.stringify(output, null, 2), 'utf8')
-  console.log(`Synced ${entries.length} entries → ${outPath}`)
+  console.log(`Synced ${normalizedEntries.length} entries → ${outPath}`)
   return output
 }
 

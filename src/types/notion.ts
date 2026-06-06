@@ -1,5 +1,12 @@
 /** Notion 数据库 type 列 */
-export type NotionEntryType = 'Config' | 'Notice' | 'Post'
+export type NotionEntryType =
+  | 'Config'
+  | 'Notice'
+  | 'Post'
+  | 'Page'
+  | 'Menu'
+  | 'SubMenu'
+  | 'photo'
 
 /** Notion 数据库 status 列 */
 export type NotionEntryStatus = 'Published' | 'Invisible' | 'Draft'
@@ -18,15 +25,17 @@ export type NotionEntryStatus = 'Published' | 'Invisible' | 'Draft'
  * | slug       | slug       |
  * | date       | date       |
  * | password   | password   |
-/**
- * icon 列 → 卡片右侧封面，同步时按以下优先级自动填充：
- * 1. Notion 表格 icon 列（URL 或 emoji）
- * 2. 页面 Cover（Post Gallery 常用）
- * 3. 页面 Icon
- * 4. 正文第一张图片
- */
+ * | icon       | icon       |
+ * | belong     | belong     |
+ *
+ * Menu：status=Published 且 type=Menu → 左侧导航
+ * belong：内容归属菜单（文章 / 课程 / 摄影…）
+ * slug：菜单跳转路径（# 时按 title 映射站内路由）
+ * 正文 content 来自 Notion 页面块，不在表格列中。
  */
 export interface NotionEntry {
+  /** Notion 页面 ID，用于 slug 重复时精确定位 */
+  id: string
   type: NotionEntryType
   title: string
   summary: string
@@ -35,9 +44,15 @@ export interface NotionEntry {
   tags: string[]
   slug: string
   date: string
+  belong?: string
   password?: string
   icon?: string
   content?: string
+}
+
+export interface NavIntroPart {
+  kind: 'text' | 'menu'
+  value: string
 }
 
 export interface BlogConfig {
@@ -45,4 +60,6 @@ export interface BlogConfig {
   description: string
   avatar: string
   totalReads: string
+  /** 左侧导航段落：灰字阅读 + menu 黑字链接 */
+  navIntro: NavIntroPart[][]
 }

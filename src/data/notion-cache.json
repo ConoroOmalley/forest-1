@@ -1,13 +1,108 @@
 {
-  "syncedAt": "2026-06-02T14:25:37.201Z",
+  "syncedAt": "2026-06-06T13:51:40.390Z",
   "blogConfig": {
     "label": "姚远寺乐园",
     "description": "做个持续记录艺术、生活和随想的人",
     "avatar": "/images/avatar.png",
-    "totalReads": "2.4万"
+    "totalReads": "2.4万",
+    "navIntro": [
+      [
+        {
+          "kind": "text",
+          "value": "来自互联网的用户体验"
+        }
+      ],
+      [
+        {
+          "kind": "text",
+          "value": "产品设计师，喜欢写点"
+        }
+      ],
+      [
+        {
+          "kind": "menu",
+          "value": "文章"
+        },
+        {
+          "kind": "text",
+          "value": "，偶尔拍拍"
+        },
+        {
+          "kind": "menu",
+          "value": "摄影"
+        },
+        {
+          "kind": "text",
+          "value": "，"
+        }
+      ],
+      [
+        {
+          "kind": "text",
+          "value": "最近正在创作"
+        },
+        {
+          "kind": "menu",
+          "value": "课程"
+        },
+        {
+          "kind": "text",
+          "value": "。"
+        }
+      ]
+    ]
   },
   "entries": [
     {
+      "id": "377a57fc-429a-8033-9eb2-f1a3765b2461",
+      "type": "photo",
+      "title": "摄 (1)",
+      "summary": "这是示例的文章摘要，摘要内容可被用做搜索，预览。文章列表默认展示概要；若要在列表直接展示文章内容，可在blog.config.js中配置。",
+      "status": "Published",
+      "category": [
+        "2024-10 随笔"
+      ],
+      "tags": [],
+      "slug": "example-1-765b2461",
+      "date": "2021/11/05",
+      "belong": "摄影",
+      "icon": "/images/notion/18a138665253.jpg",
+      "content": "<figure class=\"notion-image\"><img src=\"/images/notion/18a138665253.jpg\" alt=\"image\" loading=\"lazy\" /></figure>"
+    },
+    {
+      "id": "377a57fc-429a-8092-9993-c0084d2991f9",
+      "type": "photo",
+      "title": "2024-10-3 充实的国庆的一天 (1)",
+      "summary": "这是示例的文章摘要，摘要内容可被用做搜索，预览。文章列表默认展示概要；若要在列表直接展示文章内容，可在blog.config.js中配置。",
+      "status": "Published",
+      "category": [
+        "2024-10 随笔"
+      ],
+      "tags": [],
+      "slug": "example-1-4d2991f9",
+      "date": "2021/11/05",
+      "belong": "摄影",
+      "icon": "/images/notion/e92d19c6e7b6.png",
+      "content": "<figure class=\"notion-image\"><img src=\"/images/notion/e92d19c6e7b6.png\" alt=\"image\" loading=\"lazy\" /></figure>"
+    },
+    {
+      "id": "377a57fc-429a-80b7-8bb1-d467cd7a6e8f",
+      "type": "Post",
+      "title": "2024-10-3 充实的国庆的一天 (1)",
+      "summary": "这是示例的文章摘要，摘要内容可被用做搜索，预览。文章列表默认展示概要；若要在列表直接展示文章内容，可在blog.config.js中配置。",
+      "status": "Published",
+      "category": [
+        "2024-10 随笔"
+      ],
+      "tags": [],
+      "slug": "example-1-cd7a6e8f",
+      "date": "2021/11/05",
+      "belong": "文章",
+      "icon": "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb",
+      "content": "<p>今年国庆是这几年过的最开心的，我们一家人去了杭州的北高峰财神庙，塘栖古镇，还看了一场电影《出走的决心》。不得不说，出去走走确实对身体好，这段时间老觉得身体不是这里不舒服，就是那里疼，我想多半是气堵住了，没有顺畅地流通，所以说，看事情还是开点比较好，不要老自己跟自己过不去，累了，就休息，不开心了，就让自己开心点。</p>\n<p>回来说到电影，女主角演过好多电影，一时没记起来，查了才发现，还演过《中国式离婚》。</p>\n<p>要说感受，其实还挺大的，因为很多人都是在“等”，等着等着就老了，然后就开始后悔，不后悔的开始自我安慰，我不排斥这种做法，但是我现在的观念变了，我觉得人有时候还是要自私一点，多为自己着想一下，你得首先先爱你自己，别把自己委屈了，气病了，一点好处没有。要不停地享受每一刻，实在没办法改变，就改变自己的观念。</p>\n<p>吃到了法华寺的素面，强烈推荐，味道确实不错，只不过没拍照，拍了其他风景，也是很不错的。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/d4b9d9b2da3b.heic\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>3号去了塘栖古镇，说实话，不好玩，商业味道太浓了，杭州的商业街道没啥特色，之前去过扬州的东关街，比这里好很多，所以说，一旦啥东西跟赚钱挂上钩，味道就立马变了，不是很喜欢杭州的古镇，倒是湘湖还不错，人不多，商业化也不浓，现在去古镇，根本体验不到古味，全都是烧烤和美食。</p>"
+    },
+    {
+      "id": "373a57fc-429a-805c-b996-f36d63b51d10",
       "type": "Post",
       "title": "2024-10-3 充实的国庆 (3)",
       "summary": "这是示例的文章摘要，摘要内容可被用做搜索，预览。文章列表默认展示概要；若要在列表直接展示文章内容，可在blog.config.js中配置。",
@@ -16,12 +111,14 @@
         "2024-10 随笔"
       ],
       "tags": [],
-      "slug": "example-1",
+      "slug": "example-1-63b51d10",
       "date": "2021/11/05",
+      "belong": "文章",
       "icon": "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb",
       "content": "<p>今年国庆是这几年过的最开心的，我们一家人去了杭州的北高峰财神庙，塘栖古镇，还看了一场电影《出走的决心》。不得不说，出去走走确实对身体好，这段时间老觉得身体不是这里不舒服，就是那里疼，我想多半是气堵住了，没有顺畅地流通，所以说，看事情还是开点比较好，不要老自己跟自己过不去，累了，就休息，不开心了，就让自己开心点。</p>\n<p>回来说到电影，女主角演过好多电影，一时没记起来，查了才发现，还演过《中国式离婚》。</p>\n<p>要说感受，其实还挺大的，因为很多人都是在“等”，等着等着就老了，然后就开始后悔，不后悔的开始自我安慰，我不排斥这种做法，但是我现在的观念变了，我觉得人有时候还是要自私一点，多为自己着想一下，你得首先先爱你自己，别把自己委屈了，气病了，一点好处没有。要不停地享受每一刻，实在没办法改变，就改变自己的观念。</p>\n<p>吃到了法华寺的素面，强烈推荐，味道确实不错，只不过没拍照，拍了其他风景，也是很不错的。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/d4b9d9b2da3b.heic\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>3号去了塘栖古镇，说实话，不好玩，商业味道太浓了，杭州的商业街道没啥特色，之前去过扬州的东关街，比这里好很多，所以说，一旦啥东西跟赚钱挂上钩，味道就立马变了，不是很喜欢杭州的古镇，倒是湘湖还不错，人不多，商业化也不浓，现在去古镇，根本体验不到古味，全都是烧烤和美食。</p>"
     },
     {
+      "id": "372a57fc-429a-8017-b515-dd34dd6b7363",
       "type": "Post",
       "title": "Article Template",
       "summary": "",
@@ -30,10 +127,11 @@
       "tags": [],
       "slug": "article-template",
       "date": "2026/06/02",
-      "icon": "https://www.notion.so/images/page-cover/solid_beige.png",
+      "icon": "https://app.notion.com/images/page-cover/solid_beige.png",
       "content": "<blockquote class=\"callout\">这里写文章的前言：\n一个简单的开头,简述这篇文章讨论的问题、目标、人物、背景是什么？并简述你给出的答案。</blockquote>\n<h1>📝 主旨内容</h1>\n<h2>观点1</h2>\n<blockquote>引用的话语</blockquote>\n<h2>观点2</h2>\n<blockquote>引用的话语</blockquote>\n<h1>🤗 总结归纳</h1>\n<p>总结文章的内容</p>\n<h1>📎 参考文章</h1>\n<ul><li>一些引用</li></ul>\n<ul><li>引用文章</li></ul>\n<blockquote class=\"callout\">有关Notion安装或者使用上的问题，欢迎您在底部评论区留言，一起交流~</blockquote>"
     },
     {
+      "id": "132a57fc-429a-80b2-acb4-c09f30e0a7b2",
       "type": "Post",
       "title": "恭喜T1，恭喜faker，学习faker ",
       "summary": "",
@@ -44,10 +142,11 @@
       "tags": [],
       "slug": "恭喜t1恭喜faker学习faker",
       "date": "2024/10/04",
-      "icon": "https://www.notion.so/images/page-cover/solid_beige.png",
+      "icon": "https://app.notion.com/images/page-cover/solid_beige.png",
       "content": "<p>2024/11/3</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/54eb2d2bdbe5.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>从出道到现在，十几年了，世界赛lpl每年都打faker，一个选手，中单十几年如一日，太可怕了，已入化境，只能说lck，t1太幸运了，有faker这样的人在队伍里，就是一颗定心丸。</p>\n<p>今年的LPL是我觉得最有希望的一年，还是全华班，虽败犹荣，打得有来有回，好样的。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/628bb67da9c0.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>熟练、生巧、转移、果断、敢背锅、勇敢、逆商、团结、低调、初心、如一日、自律、不理睬跟自己无关的事情，保持一颗干净的心，多么厉害的一个人了啊，越纯粹，越厉害。</p>"
     },
     {
+      "id": "132a57fc-429a-806f-82d2-c6bf4a6ea448",
       "type": "Post",
       "title": "用户体验怎么衡量",
       "summary": "仅供列表展示、文章无内容",
@@ -64,6 +163,7 @@
       "content": "<p>2024/11/2 </p>\n<p>新体验-旧体验-替换成本=用户体验</p>\n<p>所以，在旧体验无法变动的情况下，</p>\n<p>最重要的是新体验要足够高，不是解决爽点，而是解决痛点（产品能力）</p>\n<p>其次，替换成本要足够低，上手就会用（交互能力）</p>\n<p>这样一个新产品才会被人们喜欢。</p>\n<h1></h1>"
     },
     {
+      "id": "12ba57fc-429a-80c4-a0b5-d7c4ad15e88a",
       "type": "Post",
       "title": "最近在干嘛",
       "summary": "状态不是Published，故不会被显示",
@@ -78,6 +178,7 @@
       "content": "<p>2024/10/26</p>\n<p>这周忙。</p>\n<p>周一，周二去深圳参加了展会，回来之后，工作上的事情也比较忙，拉着团队一起搞产品设计，不过还好，乐在其中，还是有些成就感的。</p>\n<p>上周跟丁丁，涂涂在酒吧吃了个饭，发现丁瘦了好多，有点心疼，好朋友瘦了，有心事了，自个儿也不是啥好滋味，希望她快乐起来吧，别瞎想，过好每一天。</p>\n<p>不过说实话，就像大冰老师说的，成年人的世界里谁都没有资格教育谁，因为大家都有各自的难处，相视一笑，别憋着就行。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/7134ee491a27.heic\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>深圳也是挺好玩的，跟涂去了趟海边的摩天轮，10月份的深圳还是要穿短袖，有点热。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/20c7399a7d32.heic\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>晚上看到商场楼下跳广场舞，发现他们过的真开心，生活不就应该是这样的么。</p>\n<p>会场跟关老师聊了聊当下行业情况，收获还是很大的，纸塑这个材料比较有意思，不知道净慈寺的包装能不能用得上，比较大和尚说不要钉子和胶水，明天试试看。</p>\n<p>还有一件事，切记要提醒自己，保持持满，保持放松，保持说话慢，举止稳，不急不躁。</p>"
     },
     {
+      "id": "124a57fc-429a-802c-9078-c4c3f3225eb0",
       "type": "Post",
       "title": "向陈xin同志学习",
       "summary": "状态不是Published，故不会被显示",
@@ -91,6 +192,7 @@
       "content": "<p>2024/10/19</p>\n<p>大学同学，现在想来，他的观念有点超前，不要想那么多，人生就是个享受的过程，我就是太拘束了，想的太多了。</p>\n<p>抽烟，喝酒，不耽误事业，不耽误家庭，做自己喜欢的，觉得牛逼的，好玩的，就足够了，其他的交给老天爷吧。</p>\n<p>谢谢。</p>\n<p>要热爱这个婆娑世界，要享受这个花花世界。</p>"
     },
     {
+      "id": "123a57fc-429a-80ef-8350-e73655dba28c",
       "type": "Post",
       "title": "随便聊聊教育",
       "summary": "状态不是Published，故不会被显示",
@@ -104,6 +206,7 @@
       "content": "<p>2024/10/18</p>\n<p>今天跟Y朋友聊了聊教育，感觉商业化还是有点严重，初中生补课需要三百多一次，太贵了。</p>\n<p>记得我小时候，补课也不带这么贵的，还有就是很多同学都补课，说明什么？学校里没学好？10%的补课率我尚能理解，如果大多数人都去补课了，那就是老师的问题了。</p>\n<p>还有就是青少年的心理问题亟待解决，听Y说，他那个学校有几个已经跳楼了，害得自己不敢对自己孩子过分说教，这个时候的孩子又正直青春期，不跟我们那会，现在回家就是玩手机，然后很晚时候开始写作业，然后APP一扫描，答案就出来了。有时候科技的进步真的会让不会独立思考的人变蠢，这么看，也算是优胜劣汰了。</p>\n<p>难啊，中国的小朋友为什么都开始卷了？如果大家在渴望知识的年龄厌倦知识，到了大学就会直接放弃知识，吃喝玩乐，没人管，都是前面憋的，憋坏了。不让孩子爱上学习，爱上知识，只是无穷无尽的竞争，到大学工作了，突然又让我们创新了，要有创造性思维了···</p>\n<p>好像大家都觉得还挺合理，合理个pi···</p>"
     },
     {
+      "id": "116a57fc-429a-80d5-a2ea-e018a2a8be4a",
       "type": "Post",
       "title": "感谢所有事，所有人",
       "summary": "",
@@ -114,10 +217,12 @@
       "tags": [],
       "slug": "感谢所有事所有人",
       "date": "2024/10/04",
-      "icon": "https://www.notion.so/images/page-cover/solid_beige.png",
+      "belong": "文章",
+      "icon": "https://app.notion.com/images/page-cover/solid_beige.png",
       "content": "<figure class=\"notion-image\"><img src=\"/images/notion/f9cf86f018fd.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>当你能量磁场够强的时候，也就是你福德修的够深的时候，谁欺负你，谁就会倒霉，这听起来是不是有点玄学？但其实从心法上来说，这都是可以讲得清楚说的明白的。首先要知道何为福？福最高的境界是无福，无福就是超越了祸福的概念，进入到了皆是福的概念，<strong>通俗一点来说，你认为别人伤害了你，你认为这是祸，这只是你的意识维度里面的认为罢了。</strong></p>\n<p>道德经有云：福兮祸所伏，祸兮福所倚。这就在阐述祸福是相依的，福的对立面是祸，祸的对立面是福。而万事都分好与坏，那么好坏才是一个整体，同理祸福才是一个整体。你要知道你为什么会认识祸，是你遇到的人事物超出了你的期待，看似是外面的人事物再让你痛苦，但其实是你的期待再让你痛苦，而期待的背后是你的认知，而所有的认知都是有局限性的，那么本质上是你的认知局限性再让你痛苦。</p>\n<p>当你认识到这一点的时候，你会从原来的理解是别人在伤害我，所以我嗔恨别人。从而转化为别人的出现让我看到了我的认知局限性，这个时候你必须要明白，看到问题比解决问题还要重要，别人的出现你看到了问题，你应该感恩别人。然后所谓的祸也就转化成了福。</p>\n<p>当你这样不停的去实践的时候就形成了一个“无福”的局面，因为都是福，外界没有了敌人，全是朋友，全是老师，全是恩人。在这种情况下就在修你的德行。<strong>当德行不停的贯彻到底的时候，别人伤害你，你感恩对方，别人帮助你，你感恩对方，这个时候如如不动就开始真正的出现了。</strong></p>\n<p>对方如果那个“伤害”你的心如果是嗔恨，那么这个嗔恨对方意识不到，不解决的时候，好了当这个惯性不停的出现的时候，对方也就在所谓的在外求，喜欢找别人的问题。这个时候对方慢慢就会进入一个局面，那就是被规律所控，等到时运不好之时，倒霉一定会来，然后又不停的抱怨，然后又不停的倒霉。最后形成了一个内耗的局面，自然而然人开始不停内耗的时候，想把事情做好是不可能的事情。</p>\n<p>感恩世界上的每一个人，每一件事，遇到事情，往好处想，觉得自己是最幸运的，观念一变，世界就变。</p>"
     },
     {
+      "id": "115a57fc-429a-801e-acbd-c9e159f21dc5",
       "type": "Post",
       "title": "电影、烧烤",
       "summary": "这是示例的文章摘要，摘要内容可被用做搜索，预览。文章列表默认展示概要；若要在列表直接展示文章内容，可在blog.config.js中配置。",
@@ -128,10 +233,12 @@
       "tags": [],
       "slug": "example-11",
       "date": "2024/10/04",
+      "belong": "文章",
       "icon": "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb",
       "content": "<p>今天天气出奇地号，陪太太出去看电影《浴火之路》，讲的是走私妇女儿童的，能找回来的概率只有3/1000，男主最后没找到儿子小狼。</p>\n<p>整部电影不好也不坏，美团评分9.2也还可以，我自己打分大概在7.8，电影没有什么回味的地方，相比之下，我更喜欢前天的《出走的决心》。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/cdea950ae7a9.heic\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/0ef01f09ca17.heic\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>此外，晚上的烧烤是在“很久以前”吃的，今天破天荒挑战自己吃了一个生蚝，发现也没啥事，挺好。很久以前的烧烤是我吃过最干净卫生的，肉也是最嫩的，第一次看到生蚝可以洗那么干净，着实挺好，另外，他家的疙瘩汤和酸菜也不错，推荐大家尝一下。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/af783176c312.heic\" alt=\"image\" loading=\"lazy\" /></figure>"
     },
     {
+      "id": "115a57fc-429a-8080-9185-ceee38394748",
       "type": "Post",
       "title": "记录下这几天干嘛了",
       "summary": "",
@@ -142,10 +249,11 @@
       "tags": [],
       "slug": "记录下这几天干嘛了",
       "date": "2024/10/04",
-      "icon": "https://www.notion.so/images/page-cover/solid_beige.png",
+      "icon": "https://app.notion.com/images/page-cover/solid_beige.png",
       "content": "<p>最近一直在做产品的UI迭代，大概做了10天，个人感觉还是挺满意的，如果做得好，会和大家分享下。</p>\n<p>其次，软考备考一直在复习，倒是没有第一次那么紧张了，不过还是希望一把过。</p>\n<p>最近有点迷恋炉石传说这个游戏，看书累了就想玩两把，玩完之后更累了，那就不玩了，直接戒了吧，88.</p>\n<p>还是那句话，要保持持满状态，保持放松状态，只有放松，你的神才会舒服，你对周围的感知力才会更强。</p>\n<p>还有就是捡到一只斑鸠，后来才知道大概率是从鸟窝里掉下来的，今天早上看着状态很不好，打电话给野生动物保护协会，说是应激反应，尽快放生，希望小斑鸠能活下去，阿弥陀佛。</p>\n<p>还有就是别忘了药钱及时支付，这是大事，得记，别老拖延人家，怪不好意思得。</p>"
     },
     {
+      "id": "115a57fc-429a-80ed-ae5e-e8bb6745af19",
       "type": "Post",
       "title": "如何摆脱恐惧",
       "summary": "",
@@ -156,10 +264,12 @@
       "tags": [],
       "slug": "如何摆脱恐惧",
       "date": "2024/10/04",
-      "icon": "https://www.notion.so/images/page-cover/solid_beige.png",
+      "belong": "文章",
+      "icon": "https://app.notion.com/images/page-cover/solid_beige.png",
       "content": "<p>我自认我是个活在恐惧中的，每天都在担心未来的事情，所以我过的不快乐是有原因的。</p>\n<p>并且很多事情，其实不是发自内心的喜欢，而是被恐惧支配，比如考大学，是为了担心以后找不到好工作，再比如手机不敢关机，是担心父母遇到麻烦没办法跟我联系，恐惧无处不在，虽然他没有发生，但是你就是不自觉地害怕。</p>\n<p>因为恐惧，所以我焦虑，焦虑的本质就是掌握不了未来的事情，没达到自己的期望，自然就焦虑了。</p>\n<p>怎么办？</p>\n<p><strong>直视他，面对他，不逃避，有意识地训练自己，在恐惧的边缘不断试探，然后进行理性复盘与总结。</strong></p>\n<figure class=\"notion-image\"><img src=\"/images/notion/4e5dec20f065.png\" alt=\"image\" loading=\"lazy\" /></figure>"
     },
     {
+      "id": "115a57fc-429a-8090-a382-d02c988511f6",
       "type": "Post",
       "title": "软考",
       "summary": "",
@@ -170,39 +280,24 @@
       "tags": [],
       "slug": "软考",
       "date": "2024/10/04",
-      "icon": "https://www.notion.so/images/page-cover/solid_beige.png",
+      "icon": "https://app.notion.com/images/page-cover/solid_beige.png",
       "content": "<h1>📝 规划服务设计活动图</h1>\n<figure class=\"notion-image\"><img src=\"/images/notion/10b404d4630f.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>正常的流程就应该是这样的吧，先识别客户的需求，然后整个文档目录，，然后想想怎么提供服务，提供的方式是什么，考虑下成本，咱不能亏本提供服务是吧，最后写个协议，搞个合同，就这么简单。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/2345b9d841f9.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>就把服务目录想成饭店点菜，就好理解了，点菜能解决：\n1.厨师不会白做（促进内部沟通、提高服务效率、降低出错率、降低成本）</p>\n<p>2.厨师分工明确，配菜+掌勺（有效把适当的成本分配给具体业务）</p>\n<p>3.客户不挑（改变终端用户的消费行为）</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/3c3dd2e34793.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>找原因就用它</p>"
     },
     {
-      "type": "Post",
-      "title": "红楼梦贾瑞之死",
-      "summary": "仅供列表展示、文章无内容，仅供列表展示、文章无内容，仅供列表展示、文章无内容。",
-      "status": "Published",
-      "category": [
-        "2024-10 随笔"
-      ],
-      "tags": [
-        "新闻",
-        "推荐"
-      ],
-      "slug": "example-3",
-      "date": "2021/07/02",
-      "icon": "https://images.unsplash.com/photo-1542907299-8bd21f11f540?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb",
-      "content": "<blockquote class=\"callout\">善恶之报，如影随形，福祸无门，惟人自召。———《太上感应篇》</blockquote>\n<p>贾瑞的死我认为有两个原因：</p>\n<p>1.家庭教育不合理</p>\n<p>2.自我没有控制力</p>\n<p>贾瑞是纵欲过度死掉的，当时20岁，这个年龄的男孩子，在古代都结婚了，但是贾瑞没有，且这个年龄的男孩子都有性冲动，合情合理，不用避讳。但是贾瑞家里贫穷，父母双亡，跟爷爷奶奶一起生活，所以在性教育上，爷爷奶奶很难跟自己的孙子讲好，讲对。爷爷也希望自己的孙子争口气，所以对贾瑞非常严厉，在这样的家庭背景中，贾瑞出现了3个问题：</p>\n<p>1.性教育没人正确指导</p>\n<p>2.过于严厉的教育只能让欲望更加强烈</p>\n<p>3.伦理关系没人教</p>\n<p>所以，贾瑞喜欢上了自己的嫂子，然后精虫上脑，无法自拔，被王熙凤耍了2回，受了惊吓，泼了大粪，导致卧床不起。这个时候，其实还有救，就是跛足道人给他送的一枚镜子，并嘱咐只能看背面，不能看正面。看背面是人的白骨，这在佛教里叫做白骨观，因为人都是一张皮，这张皮就好比镜子的正面，但是皮下面都是一样的白骨，也就是镜子的背面。让贾瑞看背面，是想让贾瑞明白这个道理，看人看事不能看表面，得看背面。但是贾瑞还是看了正面，镜子中看到了王熙凤脱衣服，跟他上床，结果自己把自己撸死了，没控制住。这就是贾瑞死的第二个原因，自我控制力太差。</p>\n<p>贾瑞的形象很像我们平常的小青年，没钱又好色，不知道节制，最后自己把自己玩废了。需要借鉴，不能走贾瑞的路。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/590b7eddd31e.png\" alt=\"image\" loading=\"lazy\" /></figure>"
-    },
-    {
+      "id": "115a57fc-429a-81af-99ca-c358c1ad0c3d",
       "type": "Menu",
-      "title": "建站教程",
+      "title": "课程",
       "summary": "菜单slug留空或填#即可，用于下面的子菜单",
-      "status": "Invisible",
+      "status": "Published",
       "category": [],
       "tags": [],
-      "slug": "#",
+      "slug": "#-c1ad0c3d",
       "date": "2023/03/23",
       "icon": "fas fa-folder",
       "content": ""
     },
     {
+      "id": "115a57fc-429a-81f9-bdfc-db60b0c3d675",
       "type": "Post",
       "title": "模板说明",
       "summary": "<- 点击标题OPEN按钮打开说明；请检查您的NOTION_PAGE_ID是否成功配置，否则会显示我的默认数据库内容。",
@@ -220,18 +315,20 @@
       "content": "<h1>如何使用Notion编写文章</h1>\n<p>请访问教程获取帮助</p>\n<h1>模板使用说明</h1>\n<p>NotionNext项目必须绑定一个Notion数据库才能使用。请访问教程获取帮助</p>\n<h2>模板字段说</h2>\n<p>Notion数据库中，每条数据都将有以下属性🤔：</p>\n\n<p>数据库的每一列有不同的功能；\n\n<code>type</code>： 这条数据的类型 ，有 <code>notice</code>(公告)、<code>post</code>(文章)、<code>page</code>(单页)、<code>menu</code>(菜单)、<code>submenu</code>(子菜单)这几种类型。\n\n<code>slug </code>，根据数据类型，有不同的作用：</p>\n<ol><li>在菜单(Menu\\SubMenu)中表示跳转到哪个页面， 在文章中表示这篇文章在博客中的访问地址、也可以是外链。通常以左斜杆开头：<code> /test-menu</code>对应访问 → https://站点域名<code>/testmenu</code>。也可以设置成完整的外链，例如<code>https://tangly1024.com</code> 。</li></ol>\n<ol><li>在单页中（Page）, 表示这个页面在站点根目录的文件名。不要以左斜杆开头: 例如 <code>test-page</code> → 对应 https://站点域名/<code>test-page</code>。</li></ol>\n<ol><li>在博文中(Post)，也表示文件路径，但是博文会自动添加一个前缀。例如: <code>test-post </code>则可以通过 https://域名/article/<code>test-post</code> 访问到这个博客，这里的article是默认配置的前缀。</li></ol>"
     },
     {
+      "id": "115a57fc-429a-810e-901c-d881ce5e01cb",
       "type": "Page",
       "title": "友链",
       "summary": "单页不会显示在博客列表，会在导航添加一个菜单。",
       "status": "Invisible",
       "category": [],
       "tags": [],
-      "slug": "links",
+      "slug": "links-ce5e01cb",
       "date": "2022/04/08",
       "icon": "fas fa-link",
       "content": "<h1>示例友链</h1>\n<p>请在你的Notion模板中修改此页面内容。</p>\n<h1>Gallery排版</h1>\n<h1>分栏排版</h1>\n<figure class=\"notion-image\"><img src=\"/images/notion/e7912815e48b.png\" alt=\"https://tangly1024.com\" loading=\"lazy\" /></figure>\n<p>             我的博客</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/e7912815e48b.png\" alt=\"https://tangly1024.com\" loading=\"lazy\" /></figure>\n<p>              友情链接</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/e7912815e48b.png\" alt=\"图片标注\" loading=\"lazy\" /></figure>\n<p>             <a href=\"https://tangly1024.com/\" target=\"_blank\" rel=\"noopener\">文字链接</a></p>\n<h1>书签</h1>"
     },
     {
+      "id": "115a57fc-429a-817d-a21c-cc58fd39e143",
       "type": "SubMenu",
       "title": "NotionNext介绍",
       "summary": "SubMenu是子菜单，挂在上一个Menu中",
@@ -243,6 +340,7 @@
       "content": ""
     },
     {
+      "id": "115a57fc-429a-8181-a0e9-c7d526473e67",
       "type": "Post",
       "title": "关于炉石传说的一点事情",
       "summary": "状态不是Published，故不会被显示",
@@ -257,6 +355,7 @@
       "content": "<p>2024/10/16</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/1ede4e2fa8e7.jpg\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>不玩了，太浪费时间了，太耗神了，吃饭想，做梦想，走路想，要戒。</p>\n<p>以后不玩了。</p>\n<p>拜拜。</p>"
     },
     {
+      "id": "115a57fc-429a-8195-93e8-e0dfe89c3a59",
       "type": "Menu",
       "title": "关于我",
       "summary": "普通菜单 跳转到指定网页",
@@ -269,6 +368,7 @@
       "content": ""
     },
     {
+      "id": "115a57fc-429a-81db-9691-c0b8fc60eb36",
       "type": "Post",
       "title": "2024.10.8 第一期",
       "summary": "如果您的Notion数据库已经修改了内容，发现网站内容还是旧的，说明绑定NotionPageID失败了，请重新检查Vercel后台是否正确配置好ID，并尝试重新部署。",
@@ -286,10 +386,11 @@
       "content": "<p>一款AI出图的国外产品，交互上做的右侧心意，区别国内很多产品，都长得差不多</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/0cf4a1b534b9.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>苹果设计系统，没事的时候可以看看</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/361eedc19a61.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>国内AI图像工具，分类还是做的很不错的，可以清晰地看到素材的处理流程，产品定位就是生成多远素材+获取无限灵感</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/457ee75cafb0.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>在线弹钢琴。</p>\n<p><a href=\"https://squarepoet.github.io/piano/v1\" target=\"_blank\" rel=\"noopener\">https://squarepoet.github.io/piano/v1</a></p>\n<figure class=\"notion-image\"><img src=\"/images/notion/3474893b22c7.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>一款令人心动的AI工具类产品，区别openai，这款产品做到了左边写需求，右边出结果，下面这个例子是在做一个类似twitter网站设计，只需要把twitter的界面截图发给他，并说明”做一个类似的网站“，右侧就很快出现了，并且左右是可以联调的，这一点就非常爽，不然跟chatgpt一样，对结果没啥概念，除非复制粘贴到本地跑一下。</p>\n<p>这里可以衍生出一个新的问题，就是<strong>人和AI之间的互动形式，更完美地方案应该是怎么样的</strong>？这里没有答案，需要你我共同去探索，所以交互设计师的作用性至关重要，去达到更具协作性质的方式。</p>\n<p><a href=\"https://claude.shovp.com/new\" target=\"_blank\" rel=\"noopener\">https://claude.shovp.com/new</a></p>\n<p><a href=\"https://www.youtube.com/watch?v=vUdNaAAc4FY\" target=\"_blank\" rel=\"noopener\">https://www.youtube.com/watch?v=vUdNaAAc4FY</a> 官方介绍</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/df2b53b8c7e1.png\" alt=\"image\" loading=\"lazy\" /></figure>"
     },
     {
+      "id": "115a57fc-429a-816b-8b50-c85ee147a881",
       "type": "Config",
       "title": "配置中心",
       "summary": "在此文档直接添加配置文件，它的优先级最高，将覆盖环境变量和blog.config.js配置",
-      "status": "Published",
+      "status": "Invisible",
       "category": [],
       "tags": [],
       "slug": "配置中心",
@@ -298,20 +399,23 @@
       "content": "<h1>配置中心使用说明</h1>\n<p>1.仅 <strong>V4.1.0</strong> 之后的版本中支持该配置页面\n2.此处配置的优先级最高，它将<strong>覆盖</strong><code>Vercel环境变量</code>、覆盖<code>blog.config.js</code>。\n3.您可以在<code>blog.config.js</code>以及各个主题的<code>config.js</code>中找到所有支持配置的<code>配置名</code>与<code>配置值</code>\n4.并非所有配置都支持，例如<code>NOTION_PAGE_ID</code>,<code>LINK</code>就不支持在这里配置等</p>\n<h2>表格字段说明</h2>\n\n<p>请不要修改这里的表头，除非你知道在哪里修改对应的代码。</p>"
     },
     {
-      "type": "Post",
-      "title": "2024-10-3 充实的国庆",
+      "id": "115a57fc-429a-81a6-861a-e96939679f1c",
+      "type": "photo",
+      "title": "摄",
       "summary": "这是示例的文章摘要，摘要内容可被用做搜索，预览。文章列表默认展示概要；若要在列表直接展示文章内容，可在blog.config.js中配置。",
       "status": "Published",
       "category": [
         "2024-10 随笔"
       ],
       "tags": [],
-      "slug": "example-1",
+      "slug": "example-1-39679f1c",
       "date": "2021/11/05",
-      "icon": "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb",
-      "content": "<p>今年国庆是这几年过的最开心的，我们一家人去了杭州的北高峰财神庙，塘栖古镇，还看了一场电影《出走的决心》。不得不说，出去走走确实对身体好，这段时间老觉得身体不是这里不舒服，就是那里疼，我想多半是气堵住了，没有顺畅地流通，所以说，看事情还是开点比较好，不要老自己跟自己过不去，累了，就休息，不开心了，就让自己开心点。</p>\n<p>回来说到电影，女主角演过好多电影，一时没记起来，查了才发现，还演过《中国式离婚》。</p>\n<p>要说感受，其实还挺大的，因为很多人都是在“等”，等着等着就老了，然后就开始后悔，不后悔的开始自我安慰，我不排斥这种做法，但是我现在的观念变了，我觉得人有时候还是要自私一点，多为自己着想一下，你得首先先爱你自己，别把自己委屈了，气病了，一点好处没有。要不停地享受每一刻，实在没办法改变，就改变自己的观念。</p>\n<p>吃到了法华寺的素面，强烈推荐，味道确实不错，只不过没拍照，拍了其他风景，也是很不错的。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/d4b9d9b2da3b.heic\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>3号去了塘栖古镇，说实话，不好玩，商业味道太浓了，杭州的商业街道没啥特色，之前去过扬州的东关街，比这里好很多，所以说，一旦啥东西跟赚钱挂上钩，味道就立马变了，不是很喜欢杭州的古镇，倒是湘湖还不错，人不多，商业化也不浓，现在去古镇，根本体验不到古味，全都是烧烤和美食。</p>"
+      "belong": "摄影",
+      "icon": "/images/notion/fa8bd7b8590d.jpg",
+      "content": "<figure class=\"notion-image\"><img src=\"/images/notion/fa8bd7b8590d.jpg\" alt=\"image\" loading=\"lazy\" /></figure>"
     },
     {
+      "id": "115a57fc-429a-81b6-aaeb-e7693b7dc549",
       "type": "Menu",
       "title": "English",
       "summary": "",
@@ -324,6 +428,7 @@
       "content": "<blockquote class=\"callout\">这里写文章的前言：\n一个简单的开头,简述这篇文章讨论的问题、目标、人物、背景是什么？并简述你给出的答案。</blockquote>\n<h1>📝 主旨内容</h1>\n<h2>观点1</h2>\n<blockquote>引用的话语</blockquote>\n<h2>观点2</h2>\n<blockquote>引用的话语</blockquote>\n<h1>🤗 总结归纳</h1>\n<p>总结文章的内容</p>\n<h1>📎 参考文章</h1>\n<ul><li>一些引用</li></ul>\n<ul><li>引用文章</li></ul>\n<blockquote class=\"callout\">有关Notion安装或者使用上的问题，欢迎您在底部评论区留言，一起交流~</blockquote>"
     },
     {
+      "id": "115a57fc-429a-81d8-b41a-f44f6d831816",
       "type": "SubMenu",
       "title": "历史归档",
       "summary": "",
@@ -336,6 +441,7 @@
       "content": "<blockquote>文章来源说明</blockquote>\n<h1>🤔 一个简单的开头</h1>\n<ol><li>问题、目标、人物、背景是什么？</li></ol>\n<ol><li>阻碍、努力、结果</li></ol>\n<ol><li>意外、转弯</li></ol>\n<h1>📝主旨内容</h1>\n<h2>观点1</h2>\n<h2>观点2</h2>\n<h1>🤗总结归纳</h1>\n<h1>参考文章</h1>\n<p>致谢：</p>\n<blockquote class=\"callout\">有关Notion安装或者使用上的问题，欢迎您在底部评论区留言，一起交流~</blockquote>"
     },
     {
+      "id": "115a57fc-429a-8171-a279-ca8d100a0dc5",
       "type": "SubMenu",
       "title": "写作是最值得投资的技能",
       "summary": "这是一个外部链接，由slug决定跳转的网址",
@@ -347,20 +453,22 @@
       "content": ""
     },
     {
+      "id": "115a57fc-429a-819a-84ad-f09d45370929",
       "type": "Notice",
       "title": "公告",
       "summary": "类型为Notice的文章将被显示为公告",
       "status": "Invisible",
       "category": [],
       "tags": [],
-      "slug": "#",
+      "slug": "#-45370929",
       "date": "2021/07/02",
       "icon": "📔",
       "content": "<figure class=\"notion-image\"><img src=\"/images/notion/e5e53963e174.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>联合实验室资深用户体验设计专家，从事互联网产品、设计理念和AI人工智能，5年以上设计团队管理经验</p>\n<h3>涉及工作</h3>\n<ul><li>参与国家重点研发计划“产业大脑技术平台研究开发与应用”</li></ul>\n<ul><li>某上市公司FUI总设计师</li></ul>\n<ul><li>设计2B包装印刷行业智能软件产品20余项</li></ul>\n<ul><li>参与乡村振兴农产品品牌建设20余地区</li></ul>\n<h3>PDF书籍 &amp; 视频课程</h3>\n<p>正在加紧，欢迎期待</p>\n<h3>其他</h3>\n<p>放轻松，不用力，无挂碍，住当下</p>\n<p>生命就是用来玩和享受的</p>"
     },
     {
+      "id": "115a57fc-429a-81ce-aa52-d9dd422ef2e5",
       "type": "Post",
-      "title": "就因为我们热爱它，所以用心做，所以努力好",
+      "title": "就因为我们热爱他，所以用心做，所以努力好",
       "summary": "仅供列表展示、文章无内容",
       "status": "Published",
       "category": [
@@ -375,6 +483,7 @@
       "content": "<p>“我另外一个舅舅是个木匠，脸上有点麻子，所以大家都叫他刘麻子。刘麻子的箱子柜做得最好、卖得最好，渐渐我们方圆40里，木匠就剩下他一个。所有的同行都觉着刘麻子毒，所有的顾客都觉着他的木匠活儿好。</p>\n<p>我说舅舅，所有同行说你毒，所有顾客说你好，你到底是毒呢？还是好呢？他说，人说你坏、说你好并不重要，问题是怎么成为一个好的木匠。我说那你是怎么成为一个好木匠的呢？他说无非别人打一个柜子花三天，我花的是六天；但只是花功夫你还不能成为一个好木匠，他说是因为我喜欢木工活，我喜欢刨子花发出的那种味道。这个舅舅告诉我，跟孔子一样的话，知之者不如好之者，好之者不如乐之者。要做你喜欢的事情。”</p>\n<p>热爱才是最大的动力，乔布斯发明iphone是因为热爱，老罗也差不多，姚明打篮球打得好是因为热爱，坂本龙一，久石让，宫崎骏，马斯克，所以能创造出经典的作品，全都是因为热爱。</p>\n<p>热爱就是不做老子就难受，就心里缺点什么。</p>\n<p>而热爱什么？需要自己去寻找，去用心感受。</p>\n<p>正是因为每个人的热爱都不一样，这个世界才会好玩，这个世界才热闹。每个人都有属于自己的独家隐藏技能，我们需要用心找到他，就这么简单。</p>\n<p>而热爱的本质，就是 玩。</p>"
     },
     {
+      "id": "115a57fc-429a-81dd-bb00-f48c9653bd35",
       "type": "Post",
       "title": "喜欢下雨天还是晴天",
       "summary": "仅供列表展示、文章无内容，仅供列表展示、文章无内容，仅供列表展示、文章无内容，仅供列表展示、文章无内容，仅供列表展示、文章无内容，仅供列表展示、文章无内容，仅供列表展示、文章无内容，仅供列表展示、文章无内容，仅供列表展示、文章无内容，仅供列表展示、文章无内容，仅供列表展示、文章无内容，仅供列表展示、文章无内容",
@@ -392,6 +501,7 @@
       "content": "<p>昨天跟好朋友聊天，说到杭州的天气变化太快，这两天一直在下雨，天气潮湿，阴冷阴冷的，我说我还挺喜欢这种天气的，可能是小时候的很多回忆都跟雨天有关系吧，在我印象里，我上一年级的第一天，就是下雨天，而且雨还挺大，下午放学回到家，我开始写拼音“a”，我把a写的很圆，我舅舅过来笑着跟我说，，要写扁一些，然后还给我示范了一下，当时我们都在外婆家的小屋，外面下着大雨，为了防止雨打进屋内，我们习惯把一把伞撑在门口，这个画面非常温暖。</p>\n<p>今天杭州的天气又转晴了，空气非常好，天非常蓝，温度也不冷不热，碰到了我朋友，我说终于转晴了，天气真好。她问到，你不是说你喜欢雨天么？</p>\n<p>对啊，我不是喜欢雨天么？怎么现在又喜欢上晴天了？</p>\n<p>接着我想了想，其实人的爱好还真的会变，有时候还变得挺快。</p>\n<p>但是，我想说的不是这一点，我真正想表达的，其实是不管晴天还是雨天，只要我们尝试着去享受，都会爱上。重要的是观念的转变，去发现美好地一面，乐观积极的一面，生活才会有意思，下雨天，我就听雨声，风声，晴天，我就感受温暖，感受风吹过我的脸，去享受当下的每一个爽点，才会开心快乐。</p>\n<p>最后，谢谢我的好朋友——一姐。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/cd203c9fbd9f.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/19e1d29f88e0.png\" alt=\"image\" loading=\"lazy\" /></figure>"
     },
     {
+      "id": "115a57fc-429a-81fe-8c2b-fe7fc83b6f1d",
       "type": "Post",
       "title": "真正活明白的人都有一个特质，原来那就是充满了烟火气",
       "summary": "",
@@ -407,6 +517,7 @@
       "content": "<p>让自己做个自由人，做个充满烟火气的人，而不是做个城市精英，允许自己土一点，接地气一点。</p>\n<p>就好像吃饭，咱得吃粗粮，一直吃细粮，不太好。</p>\n<p>充满烟火气的人，心情舒畅，开心快乐，享受当下，没有什么事情是过不去的，呵呵一笑。</p>\n<h1></h1>"
     },
     {
+      "id": "115a57fc-429a-8156-8cfe-d9b8c639a7c1",
       "type": "Post",
       "title": "加锁文章 - 密码123456",
       "summary": "本文需要输入密码才可访问，密码: 123456",
@@ -425,6 +536,7 @@
       "content": "<h1>一、模板使用说明</h1>\n<p>Notion页面中，每篇文章都有几个属性字段🤔，其说明如下：</p>\n\n<h1>二、加锁说明</h1>"
     },
     {
+      "id": "115a57fc-429a-81b0-8f1e-f9c03d10ea88",
       "type": "Post",
       "title": "为什么要做简单的产品",
       "summary": "仅供列表展示、文章无内容",
@@ -435,10 +547,11 @@
       "tags": [],
       "slug": "example-6",
       "date": "2024/10/09",
-      "icon": "https://www.notion.so/images/page-cover/texturelabs_water_135S.jpg",
+      "icon": "https://app.notion.com/images/page-cover/texturelabs_water_135S.jpg",
       "content": "<p>要把产品做简单，很难。</p>\n<p>因为需要整合的东西很多，做加法很简单，哪里不行补哪里，但是很多时候，加着加着就乱了。</p>\n<p>生活要断舍离，产品也要断舍离，有时候，重新开始也是一种莫大的勇气。</p>\n<p>但是，要把产品真正做简单，非常难。为什么？因为需要整合的东西太多，但是简单的产品，才会有生命力，东西越简单，用户就越容易跟别人分享。</p>\n<p>大道至简，世界运行的规则都很简单，简单的才是美的，才是有生命力的，才会自我传播。</p>\n<p>一个追求简单的人，他的内心一定很强大，同理，一个看起来简单的产品，他的内核也必然强大，就像刚出道的iphone，表面的简单，背后必然是技术的复杂和交互的深度思考。</p>\n<p>因为他把复杂的东西巧妙的“转移”到了别的地方。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/603dab77af46.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/6a2e401bc080.png\" alt=\"image\" loading=\"lazy\" /></figure>"
     },
     {
+      "id": "115a57fc-429a-817b-a66c-c76c5799351c",
       "type": "Menu",
       "title": "首页",
       "summary": "跳转到首页/ 的菜单",
@@ -451,6 +564,7 @@
       "content": ""
     },
     {
+      "id": "115a57fc-429a-817e-89f2-e1790be0baf4",
       "type": "Page",
       "title": "Github",
       "summary": "这是一个指向外部地址的单页",
@@ -463,6 +577,7 @@
       "content": "<p>这只是一个测试的 单页～ </p>\n<p>由于<code>slug</code>地址这一栏填写的是外链，从而这个页面会跳转到外部网站</p>"
     },
     {
+      "id": "115a57fc-429a-819d-8be5-c2a3d0894cab",
       "type": "Post",
       "title": "什么是真正的用户体验？",
       "summary": "仅供列表展示、文章无内容",
@@ -479,6 +594,7 @@
       "content": "<p>昨天跟朋友wg聊天，刚下班，天气渐暗。</p>\n<p>聊到了马斯克的火箭回收，新一代无人驾驶汽车，反观国内，就是在汽车上加个无线充电，加个冰箱，这种小更新，真正厉害的技术我不知道有没有，但是我觉得人家马斯克是真有。</p>\n<p>这才是真正的用户体验，我一直觉得，好的体验虽然需要打磨细节，但真正重要的是“内核”，是里面的东西，他的体验要好，可千万不是绣花枕头一包草，中看不中用。</p>\n<p>就像当初乔布斯发明iphone，全屏手机就是用的爽，这里是牵扯到技术革新的，因此，科技才是第一生产力，我们做设计的，说白了，就是“粉刷匠”，所以，</p>\n<p>我尊重每一位有热情的工程师，他们才能改变这个世界，我只能让这个时间变得更好看一些。</p>\n<p>我就是一个“艺人”。</p>\n<p>另外，还聊到了为什么这种革命性的科技创新，在近几十年国内很少发现，我们总结了原因，就是因为没钱，还处在温饱线上。很多人，连饭都吃不上，房都买不起，还要给公司打工，还要创新，就像马斯克说的，希望中国老板对自己的员工好一些。中国人最勤奋，上班最努力，但就是做不出独特的东西，可能都在重复劳动吧。</p>\n<p>我们太急功近利了，我们很多人都想着怎么赚钱，甚至不择手段，看看网红带货就知道了。说到底，还是穷怕了。</p>\n<h1></h1>"
     },
     {
+      "id": "115a57fc-429a-81cc-9663-f409f213bdf2",
       "type": "Post",
       "title": "产品是做给谁的？",
       "summary": "仅供列表展示、文章无内容、文章描述摘要过长时会被截断，仅显示前面几行内容，根据主题决定。这是一个示范",
@@ -495,17 +611,19 @@
       "content": "<p>都说产品是做给用户的，我觉得产品其实是做给自己的，然后吸引了一批跟自己志同道合的用户，仅此而已。</p>\n<p>所以说，我们调研的对象，不是调研他的需求，而是从交流中<strong>互相</strong>弥补自己想法中的确实点，然后优化产品，这是一个双向的过程，不是单项过程。</p>\n<p>马斯克发明汽车，火箭，太阳能，paypal，zip2，可不是因为用户有这个需求，而是因为自己有这个需求，然后把这个需求放大。所以一个产品，一个功能，自己用起来都没有<strong>高潮的感觉</strong>，就别想着让用户高潮了。</p>\n<p>中国的哲学思想大多也是这个意思，里就是外，上就是下，好就是坏，哪有对立面，只有一元论。</p>\n<p>所以，做产品，其实就是做自己，产品的好坏，直接挂钩的是这个人的气质，气度，性格，喜好，观点和想法。</p>\n<p>iphone就是乔布斯性格的映射，无论是功能，还是外观，无一不是<strong>个人意志的展现</strong>，马斯克和他的产品也是如此。</p>"
     },
     {
+      "id": "115a57fc-429a-8111-9e92-ed62f2004979",
       "type": "Menu",
-      "title": "往期整理",
+      "title": "文章",
       "summary": "",
-      "status": "Invisible",
+      "status": "Published",
       "category": [],
       "tags": [],
-      "slug": "#",
+      "slug": "#-f2004979",
       "date": "2023/03/23",
       "content": ""
     },
     {
+      "id": "115a57fc-429a-818f-a6e5-f7aad1a7f284",
       "type": "SubMenu",
       "title": "NotionNext操作说明",
       "summary": "这是一个外部链接，由slug决定跳转的网址",
@@ -517,17 +635,19 @@
       "content": ""
     },
     {
+      "id": "115a57fc-429a-819a-85ce-c5ba737bc02f",
       "type": "Menu",
-      "title": "友情链接",
+      "title": "关于",
       "summary": "跳转到/links页面的菜单",
       "status": "Invisible",
       "category": [],
       "tags": [],
-      "slug": "links",
+      "slug": "links-737bc02f",
       "date": "2023/03/23",
       "content": ""
     },
     {
+      "id": "115a57fc-429a-81c7-84a5-dcea342457a2",
       "type": "SubMenu",
       "title": "文章标签",
       "summary": "",
@@ -540,6 +660,7 @@
       "content": "<blockquote>文章来源说明</blockquote>\n<h1>🤔 一个简单的开头</h1>\n<ol><li>问题、目标、人物、背景是什么？</li></ol>\n<ol><li>阻碍、努力、结果</li></ol>\n<ol><li>意外、转弯</li></ol>\n<h1>📝主旨内容</h1>\n<h2>观点1</h2>\n<h2>观点2</h2>\n<h1>🤗总结归纳</h1>\n<h1>参考文章</h1>\n<p>致谢：</p>\n<blockquote class=\"callout\">有关Notion安装或者使用上的问题，欢迎您在底部评论区留言，一起交流~</blockquote>"
     },
     {
+      "id": "115a57fc-429a-811b-869e-e42cd9980198",
       "type": "Page",
       "title": "做个持续记录的人",
       "summary": "可用链接/about访问，不会在菜单栏显示",
@@ -552,6 +673,7 @@
       "content": "<figure class=\"notion-image\"><img src=\"/images/notion/780c76fdbee9.heic\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>故事里的老詹是一位传教士，老家在意大利，年轻时来到河南延津传教，一辈子只发展了9个信徒，不是筛选条件高，是延津人不信教。老詹常挂在嘴边的话是：信了教，你就知道你是谁，你从哪里来，要到哪里去。</p>\n<p>有一次老詹跟人说到耶稣，说耶稣事先知道，自己会被徒弟出卖钉在了十字架上，却仍然没有跑，想着用自己的痛来赎轻他人的罪···。</p>\n<p>对方只说了一句：死到临头还不跑，是不是脑子有病？</p>\n<p>老詹没说话。</p>\n<p>老詹在延津传了一辈子教，自己的唯一一所教堂还被当地政府抢过去办学院，开靶场，70岁的自己只能住在附近的破庙里，每天仍要去几十里外的地方传教，最后一次出去传教，淋了雨，发高烧，5天后就去世了，一辈子的财产只够买一口棺材。</p>\n<p>老詹就这么走了。</p>\n<p>老詹一辈子想在延津找个能说得上话的人，最能懂她的竟然是远在意大利的孙女，孙女觉得老詹是在干一件非常神圣的事情。除此之外，没人懂老詹。老詹死后，在收拾他的遗物时，翻到了一张纸，纸的正面是老詹画的新教堂建筑方案，纸的反面是老詹写的5个字：恶魔的私语。</p>\n<p><strong>恶魔的私语</strong>···这5个字，时不时会在我心里挠一下。</p>\n<p>老詹的一生太不容易了，老詹也是人，也有七情六欲，也想骂人，也想有一番作为，他内心肯定痛恨那些嘲笑他的人，不理解他的人，夺他教堂的人，但他的身份只能让他默默忍着，否则就是表里不一，表里不一的人，怎么传教？</p>\n<p>老詹是纯粹的，也是无奈的。老詹的形象跟我们很像，我们有理想，有抱负，我们想干大事，干自己喜欢的事，也想跟老詹一样，建一所宏伟的教堂，建造自己的理想国，但没人能懂，哪怕你掏心窝子跟人讲，人家最多也是表示理解，很少有人真正关心你的真实的想法，因为，我们常常自己都顾不上自己。</p>\n<p>但我仍然要像老詹一样。</p>"
     },
     {
+      "id": "115a57fc-429a-81a1-8288-d4f737dd7d79",
       "type": "SubMenu",
       "title": "文章分类",
       "summary": "",
@@ -564,10 +686,11 @@
       "content": "<blockquote>文章来源说明</blockquote>\n<h1>🤔 一个简单的开头</h1>\n<ol><li>问题、目标、人物、背景是什么？</li></ol>\n<ol><li>阻碍、努力、结果</li></ol>\n<ol><li>意外、转弯</li></ol>\n<h1>📝主旨内容</h1>\n<h2>观点1</h2>\n<h2>观点2</h2>\n<h1>🤗总结归纳</h1>\n<h1>参考文章</h1>\n<p>致谢：</p>\n<blockquote class=\"callout\">有关Notion安装或者使用上的问题，欢迎您在底部评论区留言，一起交流~</blockquote>"
     },
     {
+      "id": "115a57fc-429a-81cc-9b32-cb02f850ca0a",
       "type": "Menu",
-      "title": "搜索",
+      "title": "摄影",
       "summary": "跳转到’/search’搜索页的菜单",
-      "status": "Invisible",
+      "status": "Published",
       "category": [],
       "tags": [],
       "slug": "/search",
@@ -576,6 +699,7 @@
       "content": "<blockquote>文章来源说明</blockquote>\n<h1>🤔 一个简单的开头</h1>\n<ol><li>问题、目标、人物、背景是什么？</li></ol>\n<ol><li>阻碍、努力、结果</li></ol>\n<ol><li>意外、转弯</li></ol>\n<h1>📝主旨内容</h1>\n<h2>观点1</h2>\n<h2>观点2</h2>\n<h1>🤗总结归纳</h1>\n<h1>参考文章</h1>\n<p>致谢：</p>\n<blockquote class=\"callout\">有关Notion安装或者使用上的问题，欢迎您在底部评论区留言，一起交流~</blockquote>"
     },
     {
+      "id": "115a57fc-429a-8164-9cff-f5a3de0cd7aa",
       "type": "Post",
       "title": "你是否真正享受过走路和吃饭和喝水？",
       "summary": "无slug\\category\\tag\\tittle空白文章；此文章的路径为notion页面id",
@@ -586,7 +710,7 @@
       "tags": [],
       "slug": "你是否真正享受过走路和吃饭和喝水",
       "date": "2021/07/02",
-      "icon": "https://www.notion.so/images/page-cover/nasa_transonic_tunnel.jpg",
+      "icon": "https://app.notion.com/images/page-cover/nasa_transonic_tunnel.jpg",
       "content": "<p>2024/10/16</p>\n<p>今天中午睡醒，走在去公司的地下室路上。</p>\n<p>没有看手机，没有想公司的事情，没有看旁边的汽车。</p>\n<p>双手插兜，心平气和，轻松地走在路上，感受呼吸，感受脚在地面的摩擦，感受周围的温度，感受手心的余热，感受脑子的放空。</p>\n<p>爽，无与伦比的爽。</p>\n<p>或许真正的修行，就是这样，疯狂地享受每一刻，保持一颗放松的心，仅此而已。</p>\n<p>就像我现在在电脑上打字，感受键盘的触感和声音，整个人很平静，天地皆悉归，可能就是这种感觉。</p>"
     }
   ]
