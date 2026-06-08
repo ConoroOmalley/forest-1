@@ -15,7 +15,15 @@
       [
         {
           "kind": "text",
-          "value": "目前从事AI产品设计，偶尔写点"
+          "value": "目前从事"
+        },
+        {
+          "kind": "highlight",
+          "value": "AI产品设计"
+        },
+        {
+          "kind": "text",
+          "value": "，偶尔写点"
         },
         {
           "kind": "menu",

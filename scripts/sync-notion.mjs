@@ -340,7 +340,9 @@ export async function syncNotion() {
     navIntro: [
       [{ kind: 'text', value: '你好，我是真如，来自互联网的用户体验设计师，' }],
       [
-        { kind: 'text', value: '目前从事AI产品设计，偶尔写点' },
+        { kind: 'text', value: '目前从事' },
+        { kind: 'highlight', value: 'AI产品设计' },
+        { kind: 'text', value: '，偶尔写点' },
         { kind: 'menu', value: '文章' },
         { kind: 'text', value: '，或者拍拍' },
         { kind: 'menu', value: '摄影' },

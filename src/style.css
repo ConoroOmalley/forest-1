@@ -137,6 +137,10 @@
     @apply text-[#111111] underline underline-offset-[6px] decoration-[#111111];
   }
 
+  .hero-statement-highlight {
+    @apply text-[#e53935];
+  }
+
   .title-column-label {
     @apply text-[16px] font-normal text-[#888888] mt-4 mb-4;
     letter-spacing: 0.06em;

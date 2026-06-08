@@ -27,6 +27,9 @@ function menuMeta(label: string) {
       <template v-for="(line, lineIndex) in blogConfig.navIntro" :key="lineIndex">
         <template v-for="(part, partIndex) in line" :key="`${lineIndex}-${partIndex}`">
           <span v-if="part.kind === 'text'">{{ part.value }}</span>
+          <span v-else-if="part.kind === 'highlight'" class="hero-statement-highlight">{{
+            part.value
+          }}</span>
           <template v-else-if="part.kind === 'menu' && menuMeta(part.value)">
             <a
               v-if="menuMeta(part.value)!.external"

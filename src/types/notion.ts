@@ -51,7 +51,7 @@ export interface NotionEntry {
 }
 
 export interface NavIntroPart {
-  kind: 'text' | 'menu'
+  kind: 'text' | 'menu' | 'highlight'
   value: string
 }
 
