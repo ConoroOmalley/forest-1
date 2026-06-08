@@ -338,7 +338,7 @@ export async function syncNotion() {
     avatar: '/images/avatar.png',
     totalReads: '2.4万',
     navIntro: [
-      [{ kind: 'text', value: '你好，我是真如，来自互联网的用户体验设计师，' }],
+      [{ kind: 'text', value: '来自互联网的用户体验设计师，' }],
       [
         { kind: 'text', value: '目前从事' },
         { kind: 'highlight', value: 'AI产品设计' },
