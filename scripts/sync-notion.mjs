@@ -338,19 +338,15 @@ export async function syncNotion() {
     avatar: '/images/avatar.png',
     totalReads: '2.4万',
     navIntro: [
-      [{ kind: 'text', value: '来自互联网的用户体验' }],
-      [{ kind: 'text', value: '产品设计师，喜欢写点' }],
+      [{ kind: 'text', value: '你好，我是真如，来自互联网的用户体验设计师，' }],
       [
+        { kind: 'text', value: '目前从事AI产品设计，偶尔写点' },
         { kind: 'menu', value: '文章' },
-        { kind: 'text', value: '，偶尔拍拍' },
+        { kind: 'text', value: '，或者拍拍' },
         { kind: 'menu', value: '摄影' },
         { kind: 'text', value: '，' },
       ],
-      [
-        { kind: 'text', value: '最近正在创作' },
-        { kind: 'menu', value: '课程' },
-        { kind: 'text', value: '。' },
-      ],
+      [{ kind: 'text', value: '最近正在阅读《庄子》，欢迎交流。' }],
     ],
   }
 

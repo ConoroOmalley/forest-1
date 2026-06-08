@@ -7,17 +7,18 @@ defineProps<{
 </script>
 
 <template>
-  <section class="intro-block">
+  <article class="featured-profile">
     <img
       :src="config.avatar"
       alt="头像"
-      width="575"
-      height="1024"
-      class="intro-avatar block w-[100px] h-auto"
+      width="56"
+      height="56"
+      class="featured-profile-avatar"
     />
 
-    <p class="text-[22px] font-bold leading-[1.45] text-black">
-      {{ config.description }}
-    </p>
-  </section>
+    <div class="featured-profile-body">
+      <h3 class="featured-profile-title">{{ config.label }}</h3>
+      <p class="featured-profile-desc">{{ config.description }}</p>
+    </div>
+  </article>
 </template>

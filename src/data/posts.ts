@@ -20,6 +20,12 @@ export const posts = getEntriesByBelong(notionEntries, '文章')
 /** 课程菜单内容：belong = 课程 */
 export const courses = getEntriesByBelong(notionEntries, '课程')
 
+/** 项目：belong = 项目 */
+export const projects = getEntriesByBelong(notionEntries, '项目')
+
+/** 设计书籍：belong = 书籍 */
+export const designBooks = getEntriesByBelong(notionEntries, '书籍')
+
 /** 摄影菜单内容：type = photo */
 export const photos = getPhotoEntries(notionEntries)
 

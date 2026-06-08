@@ -14,38 +14,43 @@ const showImage = computed(
   () => media.value.mode === 'image' && media.value.coverImage && !imageFailed.value
 )
 const thumbnail = computed(() => media.value.thumbnail || '📄')
+const venueLabel = computed(() => {
+  if (props.post.category[0]) return props.post.category[0]
+  if (props.post.tags[0]) return props.post.tags[0]
+  if (props.post.belong) return props.post.belong
+  if (props.post.type === 'photo') return '摄影'
+  return ''
+})
+
+const postLink = computed(() => {
+  if (props.post.type === 'photo') {
+    return {
+      path: `/post/${props.post.slug}`,
+      query: { from: 'photography', id: props.post.id },
+    }
+  }
+  return `/post/${props.post.slug}`
+})
 </script>
 
 <template>
-  <router-link :to="`/post/${post.slug}`" class="card-entry">
-    <!-- 左侧：文字（title / summary / date ← Notion 列） -->
-    <div class="card-entry-body flex flex-col min-h-[calc(72px+2.5rem)]">
-      <h3 class="card-entry-title text-[15px] mb-2">
-        {{ post.title }}
-      </h3>
-
-      <p class="text-[12px] text-neutral-500 leading-[1.55] line-clamp-2 flex-1">
-        {{ post.summary }}
-      </p>
-
-      <span class="text-[12px] font-bold text-black mt-2">{{ dateLabel }}</span>
-    </div>
-
-    <!-- 右侧：icon / cover → 封面图或 emoji -->
-    <div v-if="showImage" class="card-entry-media">
+  <router-link :to="postLink" class="card-event">
+    <div v-if="showImage" class="card-event-thumb">
       <img
         :src="media.coverImage"
         :alt="post.title"
-        class="w-full h-full object-cover"
         loading="lazy"
         @error="imageFailed = true"
       />
     </div>
-    <div
-      v-else
-      class="card-entry-media flex items-center justify-center text-xl text-neutral-400"
-    >
+    <div v-else class="card-event-thumb card-event-thumb--placeholder">
       {{ thumbnail }}
+    </div>
+
+    <div class="card-event-body">
+      <p class="card-event-date">{{ dateLabel }}</p>
+      <h3 class="card-event-title">{{ post.title }}</h3>
+      <p v-if="venueLabel" class="card-event-venue">{{ venueLabel }}</p>
     </div>
   </router-link>
 </template>

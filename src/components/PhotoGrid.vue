@@ -4,6 +4,7 @@ import type { PhotoItem } from '@/lib/notion-mapper'
 
 const props = defineProps<{
   photos: PhotoItem[]
+  compact?: boolean
 }>()
 
 const failed = ref(new Set<string>())
@@ -19,7 +20,7 @@ function onError(src: string) {
 </script>
 
 <template>
-  <div class="photo-grid">
+  <div class="photo-grid" :class="{ 'photo-grid--compact': compact }">
     <router-link
       v-for="(photo, index) in visiblePhotos"
       :key="`${photo.id}-${index}-${photo.src}`"

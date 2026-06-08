@@ -23,6 +23,20 @@ export function formatDateLabel(dateStr: string): string {
   return `${mm}/${dd}`
 }
 
+/** 活动/课程列表日期：3月22日周日 */
+export function formatEventDate(dateStr: string): string {
+  const date = parseNotionDate(dateStr)
+  const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+  return `${date.getMonth() + 1}月${date.getDate()}日${weekdays[date.getDay()]}`
+}
+
+/** 作品卡片元信息：分类, 年份 */
+export function formatWorkMeta(entry: NotionEntry): string {
+  const category = entry.category[0] || entry.belong || 'Work'
+  const year = parseNotionDate(entry.date).getFullYear()
+  return `${category}, ${year}`
+}
+
 function extractLeadingEmoji(text: string): string | undefined {
   const match = text.match(/^(\p{Extended_Pictographic}+)/u)
   return match?.[1]
