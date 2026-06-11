@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getPostBySlug, blogConfig } from '@/data/posts'
+import { getPostBySlug } from '@/data/posts'
 import {
   formatWorkMeta,
   resolveBackRouteFromQuery,
   resolveCardMedia,
+  resolveProjectExternalUrl,
   shouldShowDetailCover,
 } from '@/lib/notion-mapper'
 
@@ -21,6 +22,21 @@ const media = computed(() => (post.value ? resolveCardMedia(post.value) : null))
 const showCover = computed(() => (post.value ? shouldShowDetailCover(post.value) : false))
 const metaLabel = computed(() => (post.value ? formatWorkMeta(post.value) : ''))
 
+const externalUrl = computed(() =>
+  post.value ? resolveProjectExternalUrl(post.value) : null
+)
+
+watch(
+  externalUrl,
+  (url) => {
+    if (!url) return
+    window.open(url, '_blank', 'noopener,noreferrer')
+    const from = typeof route.query.from === 'string' ? route.query.from : undefined
+    router.replace(resolveBackRouteFromQuery(from, post.value))
+  },
+  { immediate: true }
+)
+
 function goBack() {
   const from = typeof route.query.from === 'string' ? route.query.from : undefined
   router.push(resolveBackRouteFromQuery(from, post.value))
@@ -28,7 +44,7 @@ function goBack() {
 </script>
 
 <template>
-  <div v-if="post" class="blog-page blog-page--detail">
+  <div v-if="post && !externalUrl" class="blog-page blog-page--detail">
     <button class="text-link mb-8" @click="goBack">← 返回</button>
 
     <header class="post-detail-header">

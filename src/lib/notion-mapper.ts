@@ -142,6 +142,78 @@ export function isExternalMenuHref(href: string): boolean {
   return href.startsWith('http://') || href.startsWith('https://')
 }
 
+function decodeHtmlEntities(text: string): string {
+  return text
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+}
+
+/** 正文是否仅包含一个外链（纯文本或单个链接） */
+export function extractUrlOnlyFromContent(html: string): string | null {
+  const normalized = html
+    .replace(/<h[1-6]>\s*<\/h[1-6]>/gi, '')
+    .replace(/<p>\s*<\/p>/gi, '')
+    .trim()
+  if (!normalized) return null
+
+  const singleAnchor = normalized.match(
+    /^<p>\s*<a[^>]+href="(https?:\/\/[^"]+)"[^>]*>[\s\S]*?<\/a>\s*<\/p>$/i
+  )
+  if (singleAnchor) return singleAnchor[1]
+
+  const singlePlain = normalized.match(/^<p>\s*(https?:\/\/\S+)\s*<\/p>$/i)
+  if (singlePlain) return singlePlain[1]
+
+  const text = decodeHtmlEntities(normalized.replace(/<[^>]+>/g, '').trim())
+  const urlMatch = text.match(/^(https?:\/\/\S+)$/)
+  return urlMatch?.[1] ?? null
+}
+
+/** belong=项目 且正文只有网址时，返回外链地址 */
+export function resolveProjectExternalUrl(entry: NotionEntry): string | null {
+  if (entry.belong !== '项目') return null
+  return extractUrlOnlyFromContent(entry.content ?? '')
+}
+
+export interface EntryLink {
+  external: boolean
+  href: string
+  route?: { path: string; query?: Record<string, string> }
+}
+
+/** 列表/卡片点击目标：项目纯链接条目走外链，其余走站内详情 */
+export function resolveEntryLink(entry: NotionEntry): EntryLink {
+  if (entry.type === 'photo') {
+    return {
+      external: false,
+      href: `/post/${entry.slug}`,
+      route: { path: `/post/${entry.slug}`, query: { from: 'photography', id: entry.id } },
+    }
+  }
+
+  if (entry.belong === '课程') {
+    return {
+      external: false,
+      href: `/post/${entry.slug}`,
+      route: { path: `/post/${entry.slug}`, query: { from: 'courses' } },
+    }
+  }
+
+  const externalUrl = resolveProjectExternalUrl(entry)
+  if (externalUrl) {
+    return { external: true, href: externalUrl }
+  }
+
+  return {
+    external: false,
+    href: `/post/${entry.slug}`,
+    route: { path: `/post/${entry.slug}` },
+  }
+}
+
 export interface PhotoItem {
   id: string
   src: string
@@ -207,6 +279,7 @@ export function resolveBackRoute(entry: NotionEntry): string {
   if (entry.type === 'photo') return '/photography'
   if (entry.belong === '课程') return '/courses'
   if (entry.belong === '摄影') return '/photography'
+  if (entry.belong === '项目') return '/'
   return '/articles'
 }
 
