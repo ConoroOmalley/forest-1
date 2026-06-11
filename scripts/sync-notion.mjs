@@ -346,9 +346,8 @@ export async function syncNotion() {
         { kind: 'menu', value: '文章' },
         { kind: 'text', value: '，或者拍拍' },
         { kind: 'menu', value: '摄影' },
-        { kind: 'text', value: '，' },
+        { kind: 'text', value: '。' },
       ],
-      [{ kind: 'text', value: '最近正在阅读《庄子》，欢迎交流。' }],
     ],
   }
 

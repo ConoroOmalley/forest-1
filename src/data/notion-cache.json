@@ -1,7 +1,7 @@
 {
-  "syncedAt": "2026-06-08T14:04:42.544Z",
+  "syncedAt": "2026-06-11T23:24:29.094Z",
   "blogConfig": {
-    "label": "姚远寺乐园",
+    "label": "设计花园",
     "description": "做个持续记录艺术、生活和随想的人",
     "avatar": "/images/avatar.png",
     "totalReads": "2.4万",
@@ -39,18 +39,83 @@
         },
         {
           "kind": "text",
-          "value": "，"
-        }
-      ],
-      [
-        {
-          "kind": "text",
-          "value": "最近正在阅读《庄子》，欢迎交流。"
+          "value": "。"
         }
       ]
     ]
   },
   "entries": [
+    {
+      "id": "250a57fc-429a-829a-b065-8156fd6c1748",
+      "type": "Post",
+      "title": "使用Figma skills+Claude生成UI设计",
+      "summary": "",
+      "status": "Published",
+      "category": [],
+      "tags": [],
+      "slug": "使用figma-skillsclaude生成ui设计",
+      "date": "2026/06/08",
+      "belong": "文章",
+      "icon": "/images/notion/4e3d6a7b2e9c.png",
+      "content": "<p>什么是figma skills？</p>\n<p>一句话，Figma skills是一份结构化文件，用于指导AI如何使用Figma。这份文件定义了如何去做一些具体的操作，比如UI设计中的布局、组件、变量等，最关键的是，它可以重复使用。</p>\n<p>大家肯定有个疑问，就是这个skills到底和普通的AI对话，区别在哪里？或者说，因为遇到了什么问题，然后出来了这个skills来解决这类问题的。</p>\n<blockquote class=\"callout\">简单来说，<strong>Figma Skills 是将“碎片化的对话指令”转化为“标准化的操作流程”</strong>。</blockquote>\n<p>我们先看到figma的skills介绍官网</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/4e3d6a7b2e9c.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>往下滑动，这里就是figma官方提供的一些skills。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/9a75e923b94e.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>但是，首先，我们需要先安装。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/a8b8d0a4048a.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/0171a9a238ac.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>点击下载按钮</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/74d5a9216ed1.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>然后我们还要把下面这些都下载下来，大家一定要整理好下载的文件内容，不然后面很难找。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/0bfd5fb5ec70.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/165d1ddb3d8f.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>打开claude，我们先连接上figma MCP</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/0d0ac1e4ad7a.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/e8aaf1871be8.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/c81390113248.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>这样就算连上啦。</p>\n<p>下面开始安装skills</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/fe6449c0bb82.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>这里需要注意的是，我们在上传的时候，文件结构需要和github上保持一致。</p>\n<p>下面是我整理好的，大家可以直接下载使用。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/a2da29816005.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>我们本地的文件结构如下：</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/5ceb75a3cb02.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/8185d7d778c3.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>okk，这样就算是吧skills安装好啦。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/87e3d2ec842a.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>之后打开figma，就能看到claude已经帮我们生成好了用上变量的登录界面UI啦。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/dcdcb6188713.png\" alt=\"image\" loading=\"lazy\" /></figure>"
+    },
+    {
+      "id": "379a57fc-429a-80e0-86f8-d7bd433d47e8",
+      "type": "Post",
+      "title": "01如何快速创建颜色变量（Variables） (1)",
+      "summary": "",
+      "status": "Published",
+      "category": [],
+      "tags": [],
+      "slug": "01如何快速创建颜色变量variables-1",
+      "date": "2026/06/08",
+      "belong": "文章",
+      "icon": "😄",
+      "content": "<figure class=\"notion-image\"><img src=\"/images/notion/910cf3abd6ed.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>颜色变量是所有变量的基础，也是设计系统的基础，在这里，我将分享如何简单快速地创建颜色变量。</p>\n<p>我们可以先从品牌色开始着手搭建。如下图，我们设置#F563EF为品牌色，简单说就是橙色。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/91fd2a0361b9.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>然后，我们把橙色覆盖在黑色之上，调整透明度即可得到一个系列的橙色的梯度色板（这里调整之后颜色是越来越深）。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/fa3b2613455f.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/3c46996da9e8.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>那越来越浅的橙色应该怎么调整呢？也非常简单，只要将#F563EF本身调整透明度即可。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/e8543c3689ea.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>如此一来，我们就得到了一套完整的橙色颜色的梯度色板。如下图：</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/09c4925af268.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>到这里，其实就差不多了，然后我们再用吸色工具，将这个带着透明度的颜色重新吸一遍，就能得到完整的十六进制的颜色。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/7002126437bc.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/85ce09ebdfa1.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>然后，选择我们需要的梯度数量，一般是10-12个。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/88404a406934.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>如果你觉得麻烦，也可以用在线的转换器来做，这里推荐1个叫做：</p>\n<p>在箭头处输入刚刚的数值#F563EF，就可以很快得到一套橙色的梯度色板。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/027a044bd6ee.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>颜色下方的对号、感叹号和错误号，是和白色颜色的对比度检测是否符合WCAG的标准。</p>\n<p>关于WCAG是什么意思，可以先简单了解下：</p>\n<blockquote class=\"callout\">WCAG（Web内容无障碍指南）分级标准用于衡量网页内容的无障碍程度，主要分为A、AA、AAA三级。<strong>AA级（双A）</strong>是目前最通用的国际标准，要求内容对大多数人无障碍；<strong>AAA级（3A）</strong>要求最高，适用于特定需要或追求最高无障碍等级的站点，涵盖更多细致规范。</blockquote>\n<figure class=\"notion-image\"><img src=\"/images/notion/50e213b5f49a.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>然后鼠标单击一个颜色，右下角会看到已经复制OKLCH的CSS。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/98e584a3b8bb.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>在figma中绘制一个矩形，将这个粘贴到颜色中的CSS模式中，如下图，就能得到这个色块的颜色，依此类推，我们也可以得到一套梯度色板。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/85c8b1b4850e.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/b2296b14d93b.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>当然，你也可以直接用figma插件来做，也方便。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/bade901ff1e3.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/ca10393f017f.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>这里有个小发现，就是用OKLCH做梯度色板的时候，你会发现你之前输入的#F5631F，在色板中只有类似的色号，这是因为为了让梯度看起来顺滑，生成工具通常会修改你的原始值，使其符合数学上的亮度阶梯，这也是OKLCH的最大特色，就是视觉感知的均匀性。</p>\n<p>好了，梯度色板做好之后，就是怎么导入到变量中的问题了。</p>\n<p>根据箭头指示点击“color”</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/9f3f8d79c884.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/d63459d7382e.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>按照下方的命名方式，这里的“/”，我们可以理解成子菜单的意思。这里的“100”，是一种常见的命名方式。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/91f33da55b49.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>也就是在color下，有一个orange，下面再有一个100，如下图：</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/0925c83dac50.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>复制粘贴，就可以得到更多变量。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/50f01c5e22d5.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>然后把刚刚的颜色填入后面的色块，就可以了。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/f3efb80786e5.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>按照上方的步骤，把别的颜色全部补上，就可以啦。</p>\n<p>以上就是基础的颜色变量设置，谢谢，</p>"
+    },
+    {
+      "id": "c40a57fc-429a-83b3-8768-01594ed9831b",
+      "type": "Post",
+      "title": "figma+cursor 搞定变量和组件完整教程",
+      "summary": "",
+      "status": "Published",
+      "category": [],
+      "tags": [],
+      "slug": "figmacursor-搞定变量和组件完整教程",
+      "date": "2026/06/08",
+      "belong": "文章",
+      "icon": "/images/notion/5d4268264afa.png",
+      "content": "<p>今天我们了解下怎么通过cursor把figma的变量和组件做一个深度的结合，确保cursor出来的页面跟我们的设计稿一样，或者说尽量一样。</p>\n<p>当然，本视频无法涵盖所有问题，所以我会在发现问题的同时，一直更新教程。</p>\n<p>我们用一个简单的灵动岛来做个实验。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/5d4268264afa.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>上面的灵动岛可以看到是三个组件，分别是开始计时、暂时计时和关闭计时</p>\n<p>它的变量如下：</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/80d02b7d2afa.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/bd4e4b118295.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/c4213c8b57ee.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/3ec265f71722.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>以上是准备工作，现在我们打开cursor，开始将这个静态UI变成可交互的动态UI。</p>\n<p>先确保这里是绿色连上的。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/cebc9012f3d4.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>别忘了这里也要点击。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/dbd1fc053306.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>我们先在桌面新建一个文件夹叫做“cursor files”，然后用cursor打开桌面的这个项目。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/ccbfe069d0e4.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>然后在右侧输入框输入提示词：</p>\n<blockquote class=\"callout\">用html和css创建一个灵动岛的计时器，用来自我的figma文件，并实现交互（开始计时、暂停计时和关闭计时）。严格使用与我 Figma 文件中完全一致的变量。</blockquote>\n<figure class=\"notion-image\"><img src=\"/images/notion/f8888bee82a4.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>提示要链接，所以把figma的分享链接也给到cursor</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/1de7f009506e.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>提示要选中图层。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/c6c1706cbc01.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>成功之后，我们看下1.0版本，这是浏览器打开的效果，额，发现有的地方不太对，主要是间距。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/af0b1d4d1f2c.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>所以还要继续聊。</p>\n<blockquote class=\"callout\">不错，但是请注意元素之间的间距，要严格按照设计稿中的变量。</blockquote>\n<p>这是2.0版本，发现，嗯，有进步</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/366e3041eee8.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>但是组件还是没有对上，所以还得继续聊。</p>\n<blockquote class=\"callout\">组件也要严格按照我的设计稿中组件</blockquote>\n<p>可以看到，cursor开始慢慢理解我们的意思了。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/dff3ae6cec6e.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>这是3.0版本，你发现，按钮位置不对，但是越来越接近了。</p>\n<p>我寻思应该是这里的自动布局参数不对。我把上下和左右的间距都调整成0</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/3a0a7c37915f.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/0b5a82b1b0fa.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<blockquote class=\"callout\">不错，我更新了组件的自动布局，现在根据我最新的组件，重新优化下图标。</blockquote>\n<p>这是4.0版本，看，这样就对了。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/471cd839d0ce.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>还差最后一点点，就是那个橙色线条的进度条，这里我理解是因为cursor没理解我们需要的交互形式。所以要描述清楚。我们可以借助AI来提供描述。</p>\n<blockquote class=\"callout\">计时器中的进度条是上下两个图层，底部是一个深灰色（参考变量），顶部是一个橙色（参考变量）。然后交互逻辑是进度条应从正上方中心点（12点钟方向）开始，顺时针方向减少或增加。</blockquote>\n<p>这是5.0版，本已经很接近了，但好像不是从12点方向开始，我们最后调整下。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/0a6c8bf938a7.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/ff54fb110bf1.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>ok，搞定。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/ff1a13172334.png\" alt=\"image\" loading=\"lazy\" /></figure>"
+    },
+    {
+      "id": "2b8a57fc-429a-8291-a86c-0191ae61f863",
+      "type": "Post",
+      "title": "figma MCP+Cursor安装教程",
+      "summary": "",
+      "status": "Published",
+      "category": [],
+      "tags": [],
+      "slug": "figma-mcpcursor安装教程",
+      "date": "2026/06/08",
+      "belong": "文章",
+      "icon": "/images/notion/ac5e063fb6c0.png",
+      "content": "<p>教程不难，只要耐心看，就能看懂哦</p>\n<p>简单来说，<strong>MCP (Model Context Protocol)</strong> 是一种<strong>通用开放标准</strong>。你可以把它想象成 AI 界的“万能插座”。</p>\n<p>首先下载你的cursor，这里有两个配置你需要熟悉下：</p>\n<p>1.默认cursor是暗色界面，本人不喜欢暗色界面，所以你可以在顶部的输入框</p>\n<pre><code>按下 Ctrl + Shift + P (Win) 或 Cmd + Shift + P (Mac) 打开命令面板。\n\n输入 \"Color Theme\" 并回车。\n\n在列表中选择你喜欢的日间模式主题即可。</code></pre>\n<p>2.其次，英文界面咱也看不懂，所以你需要安装一个扩展插件。</p>\n<pre><code>打开插件市场：点击编辑器左侧边栏的方块图标（Extensions），或者使用快捷键 Ctrl + Shift + X (Win) / Cmd + Shift + X (Mac)。\n\n搜索中文包：在搜索框中输入 \"Chinese\"。\n\n安装插件：找到由 Microsoft 发布的 \"Chinese (Simplified) (简体中文)\"，点击蓝色的 Install 按钮。\n\n重启编辑器：安装完成后，右下角通常会弹出提示询问是否重启（Restart），点击重启后界面就会变为中文。</code></pre>\n<p>需要注意的是，这个汉化只能汉化90%的语言，比如顶部菜单栏已经变成中文了。但是<strong>Cursor 特有的全局设置页面</strong>，这个页面目前确实只支持英文。不过，我们通常使用的编辑器菜单和核心功能，是通过 <strong>VS Code 的基础设置</strong> 来汉化的。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/ac5e063fb6c0.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>OK，到这一步，我们开始安装MCP，</p>\n<p>第一步：在你Cursor右侧的输入框输入，然后发送出去</p>\n<pre><code>/add-plugin figma</code></pre>\n<p>这个插件包含：</p>\n<ul><li>Figma MCP 服务器的 MCP 服务器配置</li></ul>\n<ul><li>具备实现设计、通过 Code Connect 连接组件以及创建设计系统规则的技能</li></ul>\n<ul><li>Figma MCP 服务器资产处理的正确规则</li></ul>\n<p>你就会看到如下的界面，点击安装</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/e845fd6e0b89.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>安装之后，显示如下界面</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/de3eb8d70423.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>打开figma，切换到开发者模式，点击“enable···server”按钮，看到cursor，然后点击“+add”按钮。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/4e8824359099.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/be754368774a.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>接着，打开curosr右上角的“setting”（也可能会自动跳转到当前页面），然后点击“tools &amp; MCP”，点击“install”，再点击“connect”。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/003a6c492c5b.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/f13098118ce3.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>就会在浏览器中得到如下的界面，点击蓝色允许按钮。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/dc73135a127e.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>看的下面的绿色点点，说明就成功啦。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/604e6ca888c4.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>你现在可以问下cursor，你现在可以正常使用mcp么？看看怎么回复</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/ab431129e5c5.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>测试一下，打开figma，然后选择一个frame，右击选择“copy link to selection”</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/7bca6be425f6.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>然后把链接复制到cursor的对话框中，让他1:1复刻。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/cc5afbf1969f.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>打开它的输出链接，就能在浏览器访问啦。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/fef6ac262ded.png\" alt=\"image\" loading=\"lazy\" /></figure>"
+    },
+    {
+      "id": "5e2a57fc-429a-82ab-9be3-012c0bd75333",
+      "type": "Post",
+      "title": "网站首页动画提示词",
+      "summary": "这是示例的文章摘要，摘要内容可被用做搜索，预览。文章列表默认展示概要；若要在列表直接展示文章内容，可在blog.config.js中配置。",
+      "status": "Published",
+      "category": [
+        "2024-10 随笔"
+      ],
+      "tags": [],
+      "slug": "网站首页动画提示词",
+      "date": "2026/06/08",
+      "belong": "文章",
+      "content": "<figure class=\"notion-image\"><img src=\"/images/notion/6f1a0ad7b1df.png\" alt=\"image\" loading=\"lazy\" /></figure>\n\n\n<p>以下所有的提示词均来自X上的博主：Viktor Oddy ，当然你也可以访问他主页里的这个网站去付费查看更多有意思的动画。</p>"
+    },
     {
       "id": "377a57fc-429a-8006-8683-e3664db2afe7",
       "type": "photo",
@@ -294,7 +359,7 @@
     {
       "id": "377a57fc-429a-80b7-8bb1-d467cd7a6e8f",
       "type": "Post",
-      "title": "2024-10-3 充实的国庆的一天 (1)",
+      "title": "《庄子》",
       "summary": "这是示例的文章摘要，摘要内容可被用做搜索，预览。文章列表默认展示概要；若要在列表直接展示文章内容，可在blog.config.js中配置。",
       "status": "Published",
       "category": [
@@ -303,7 +368,7 @@
       "tags": [],
       "slug": "example-1-cd7a6e8f",
       "date": "2021/11/05",
-      "belong": "文章",
+      "belong": "书籍",
       "icon": "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb",
       "content": "<p>今年国庆是这几年过的最开心的，我们一家人去了杭州的北高峰财神庙，塘栖古镇，还看了一场电影《出走的决心》。不得不说，出去走走确实对身体好，这段时间老觉得身体不是这里不舒服，就是那里疼，我想多半是气堵住了，没有顺畅地流通，所以说，看事情还是开点比较好，不要老自己跟自己过不去，累了，就休息，不开心了，就让自己开心点。</p>\n<p>回来说到电影，女主角演过好多电影，一时没记起来，查了才发现，还演过《中国式离婚》。</p>\n<p>要说感受，其实还挺大的，因为很多人都是在“等”，等着等着就老了，然后就开始后悔，不后悔的开始自我安慰，我不排斥这种做法，但是我现在的观念变了，我觉得人有时候还是要自私一点，多为自己着想一下，你得首先先爱你自己，别把自己委屈了，气病了，一点好处没有。要不停地享受每一刻，实在没办法改变，就改变自己的观念。</p>\n<p>吃到了法华寺的素面，强烈推荐，味道确实不错，只不过没拍照，拍了其他风景，也是很不错的。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/d4b9d9b2da3b.heic\" alt=\"image\" loading=\"lazy\" /></figure>\n<p>3号去了塘栖古镇，说实话，不好玩，商业味道太浓了，杭州的商业街道没啥特色，之前去过扬州的东关街，比这里好很多，所以说，一旦啥东西跟赚钱挂上钩，味道就立马变了，不是很喜欢杭州的古镇，倒是湘湖还不错，人不多，商业化也不浓，现在去古镇，根本体验不到古味，全都是烧烤和美食。</p>"
     },
@@ -365,7 +430,7 @@
       ],
       "slug": "example-12",
       "date": "2021/07/02",
-      "belong": "课程",
+      "belong": "文章",
       "icon": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb",
       "content": "<p>2024/11/2 </p>\n<p>新体验-旧体验-替换成本=用户体验</p>\n<p>所以，在旧体验无法变动的情况下，</p>\n<p>最重要的是新体验要足够高，不是解决爽点，而是解决痛点（产品能力）</p>\n<p>其次，替换成本要足够低，上手就会用（交互能力）</p>\n<p>这样一个新产品才会被人们喜欢。</p>\n<h1></h1>"
     },
@@ -754,6 +819,7 @@
       "tags": [],
       "slug": "example-6",
       "date": "2024/10/09",
+      "belong": "项目",
       "icon": "https://app.notion.com/images/page-cover/texturelabs_water_135S.jpg",
       "content": "<p>要把产品做简单，很难。</p>\n<p>因为需要整合的东西很多，做加法很简单，哪里不行补哪里，但是很多时候，加着加着就乱了。</p>\n<p>生活要断舍离，产品也要断舍离，有时候，重新开始也是一种莫大的勇气。</p>\n<p>但是，要把产品真正做简单，非常难。为什么？因为需要整合的东西太多，但是简单的产品，才会有生命力，东西越简单，用户就越容易跟别人分享。</p>\n<p>大道至简，世界运行的规则都很简单，简单的才是美的，才是有生命力的，才会自我传播。</p>\n<p>一个追求简单的人，他的内心一定很强大，同理，一个看起来简单的产品，他的内核也必然强大，就像刚出道的iphone，表面的简单，背后必然是技术的复杂和交互的深度思考。</p>\n<p>因为他把复杂的东西巧妙的“转移”到了别的地方。</p>\n<figure class=\"notion-image\"><img src=\"/images/notion/603dab77af46.png\" alt=\"image\" loading=\"lazy\" /></figure>\n<figure class=\"notion-image\"><img src=\"/images/notion/6a2e401bc080.png\" alt=\"image\" loading=\"lazy\" /></figure>"
     },
@@ -797,7 +863,7 @@
       ],
       "slug": "example-9",
       "date": "2021/07/02",
-      "belong": "课程",
+      "belong": "文章",
       "icon": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb",
       "content": "<p>昨天跟朋友wg聊天，刚下班，天气渐暗。</p>\n<p>聊到了马斯克的火箭回收，新一代无人驾驶汽车，反观国内，就是在汽车上加个无线充电，加个冰箱，这种小更新，真正厉害的技术我不知道有没有，但是我觉得人家马斯克是真有。</p>\n<p>这才是真正的用户体验，我一直觉得，好的体验虽然需要打磨细节，但真正重要的是“内核”，是里面的东西，他的体验要好，可千万不是绣花枕头一包草，中看不中用。</p>\n<p>就像当初乔布斯发明iphone，全屏手机就是用的爽，这里是牵扯到技术革新的，因此，科技才是第一生产力，我们做设计的，说白了，就是“粉刷匠”，所以，</p>\n<p>我尊重每一位有热情的工程师，他们才能改变这个世界，我只能让这个时间变得更好看一些。</p>\n<p>我就是一个“艺人”。</p>\n<p>另外，还聊到了为什么这种革命性的科技创新，在近几十年国内很少发现，我们总结了原因，就是因为没钱，还处在温饱线上。很多人，连饭都吃不上，房都买不起，还要给公司打工，还要创新，就像马斯克说的，希望中国老板对自己的员工好一些。中国人最勤奋，上班最努力，但就是做不出独特的东西，可能都在重复劳动吧。</p>\n<p>我们太急功近利了，我们很多人都想着怎么赚钱，甚至不择手段，看看网红带货就知道了。说到底，还是穷怕了。</p>\n<h1></h1>"
     },
@@ -815,7 +881,7 @@
       ],
       "slug": "example-10",
       "date": "2021/07/02",
-      "belong": "课程",
+      "belong": "文章",
       "icon": "https://images.unsplash.com/photo-1524601500432-1e1a4c71d692?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb",
       "content": "<p>都说产品是做给用户的，我觉得产品其实是做给自己的，然后吸引了一批跟自己志同道合的用户，仅此而已。</p>\n<p>所以说，我们调研的对象，不是调研他的需求，而是从交流中<strong>互相</strong>弥补自己想法中的确实点，然后优化产品，这是一个双向的过程，不是单项过程。</p>\n<p>马斯克发明汽车，火箭，太阳能，paypal，zip2，可不是因为用户有这个需求，而是因为自己有这个需求，然后把这个需求放大。所以一个产品，一个功能，自己用起来都没有<strong>高潮的感觉</strong>，就别想着让用户高潮了。</p>\n<p>中国的哲学思想大多也是这个意思，里就是外，上就是下，好就是坏，哪有对立面，只有一元论。</p>\n<p>所以，做产品，其实就是做自己，产品的好坏，直接挂钩的是这个人的气质，气度，性格，喜好，观点和想法。</p>\n<p>iphone就是乔布斯性格的映射，无论是功能，还是外观，无一不是<strong>个人意志的展现</strong>，马斯克和他的产品也是如此。</p>"
     },

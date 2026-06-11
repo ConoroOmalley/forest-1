@@ -11,7 +11,8 @@
   }
 
   body {
-    @apply text-[#111111] font-sans min-h-screen bg-white;
+    @apply text-ink font-sans min-h-screen bg-page;
+    line-height: 1.5;
   }
 }
 
@@ -45,11 +46,11 @@
   }
 
   .site-identity-name {
-    @apply text-[15px] font-semibold text-[#111111] leading-tight tracking-[-0.01em];
+    @apply text-[15px] font-bold text-ink leading-tight tracking-[-0.01em];
   }
 
   .site-identity-role {
-    @apply text-[13px] text-[#888888] leading-tight mt-0.5;
+    @apply text-[13px] text-muted leading-tight mt-0.5;
   }
 
   .site-nav {
@@ -57,7 +58,7 @@
   }
 
   .site-nav-link {
-    @apply text-[14px] text-[#111111] no-underline font-normal transition-opacity;
+    @apply text-[14px] text-ink no-underline font-normal transition-opacity;
   }
 
   .site-nav-link:hover {
@@ -115,8 +116,8 @@
     min-height: 100%;
     padding: clamp(32px, 5vw, 80px);
     padding-top: 0;
-    border-right: 1px solid #f0f0f0;
-    border-top: 1px solid #f0f0f0;
+    border-right: 1px solid theme('colors.line');
+    border-top: 1px solid theme('colors.line');
   }
 
   .title-column:last-child {
@@ -128,13 +129,12 @@
   }
 
   .hero-statement-text {
-    @apply text-[clamp(24px,3.2vw,36px)] font-semibold text-[#111111] leading-[1.3] tracking-[-0.04em] m-0;
+    @apply text-[clamp(28px,3.6vw,48px)] font-medium text-ink leading-[1.35] tracking-[-0.03em] m-0;
     max-width: min(720px, 52vw);
-    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   .hero-statement-link {
-    @apply text-[#111111] underline underline-offset-[6px] decoration-[#111111];
+    @apply text-ink underline underline-offset-[6px] decoration-ink;
   }
 
   .hero-statement-highlight {
@@ -142,7 +142,7 @@
   }
 
   .title-column-label {
-    @apply text-[16px] font-normal text-[#888888] mt-4 mb-4;
+    @apply text-[14px] font-bold text-muted mt-4 mb-4;
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
@@ -152,7 +152,7 @@
   }
 
   .title-column-list--hovering .title-column-link {
-    @apply text-[#d4d4d4];
+    @apply text-line;
   }
 
   .title-column-item {
@@ -160,8 +160,7 @@
   }
 
   .title-column-link {
-    @apply inline-flex text-[20px] font-extrabold text-[#383838] no-underline leading-tight;
-    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    @apply inline-flex text-[18px] font-normal text-ink no-underline leading-[1.4];
     transition: color 0.2s ease, transform 0.2s ease;
   }
 
@@ -171,13 +170,13 @@
 
   .title-column-link-text::after {
     content: '';
-    @apply absolute left-0 bottom-0 h-[2px] w-0 bg-[#111111];
+    @apply absolute left-0 bottom-0 h-[2px] w-0 bg-ink;
     transition: width 0.25s ease;
   }
 
   .title-column-link:hover,
   .title-column-list--hovering .title-column-item:hover .title-column-link {
-    @apply text-[#111111];
+    @apply text-ink;
     transform: translateX(6px);
   }
 
@@ -187,7 +186,7 @@
   }
 
   .title-column-link:focus-visible {
-    @apply outline-none text-[#111111];
+    @apply outline-none text-ink;
     transform: translateX(6px);
   }
 
@@ -196,12 +195,11 @@
   }
 
   .title-column-empty {
-    @apply text-[20px] font-extrabold text-[#bbbbbb] m-0;
-    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    @apply text-[18px] font-normal text-line m-0;
   }
 
   .home-bottom-title {
-    @apply text-[18px] font-semibold text-[#111111] m-0 mb-6 tracking-[-0.02em];
+    @apply text-[18px] font-bold text-ink m-0 mb-6 tracking-[-0.02em];
   }
 
   .course-cover-grid {
@@ -211,7 +209,7 @@
   }
 
   .course-cover-item {
-    @apply block overflow-hidden bg-[#ececec] transition-opacity duration-150;
+    @apply block overflow-hidden bg-surface transition-opacity duration-150;
     aspect-ratio: 3 / 4;
   }
 
@@ -232,7 +230,7 @@
   }
 
   .work-section-label {
-    @apply text-[14px] text-[#888888] m-0 font-normal;
+    @apply text-[14px] text-muted m-0 font-bold;
   }
 
   .work-grid {
@@ -250,7 +248,7 @@
   }
 
   .work-card-cover {
-    @apply w-full overflow-hidden bg-[#ececec] mb-4;
+    @apply w-full overflow-hidden bg-surface mb-4;
     aspect-ratio: 4 / 3;
   }
 
@@ -263,11 +261,11 @@
   }
 
   .work-card-title {
-    @apply text-[16px] font-semibold text-[#111111] leading-snug line-clamp-2 m-0 tracking-[-0.01em];
+    @apply text-[16px] font-bold text-ink leading-snug line-clamp-2 m-0 tracking-[-0.01em];
   }
 
   .work-card-meta {
-    @apply text-[14px] text-[#888888] m-0 mt-2 font-normal leading-snug;
+    @apply text-[14px] text-muted m-0 mt-2 font-normal leading-[1.5];
   }
 
   .site-footer {
@@ -281,15 +279,15 @@
   }
 
   .site-footer-link {
-    @apply text-[15px] text-[#111111] underline underline-offset-4 w-fit;
+    @apply text-[15px] text-ink underline underline-offset-4 w-fit;
   }
 
   .site-footer-bar {
-    @apply flex items-center justify-between gap-4 text-[13px] text-[#888888];
+    @apply flex items-center justify-between gap-4 text-[13px] text-muted;
   }
 
   .text-link {
-    @apply text-[14px] text-[#111111] underline underline-offset-4 bg-transparent border-0 p-0 cursor-pointer;
+    @apply text-[14px] text-ink underline underline-offset-4 bg-transparent border-0 p-0 cursor-pointer;
   }
 
   .post-detail-header {
@@ -297,15 +295,15 @@
   }
 
   .post-detail-title {
-    @apply text-[32px] font-semibold text-[#111111] leading-tight tracking-[-0.03em] mb-3 m-0;
+    @apply text-[clamp(28px,4vw,40px)] font-bold text-ink leading-[1.2] tracking-[-0.03em] mb-3 m-0;
   }
 
   .post-detail-meta {
-    @apply text-[14px] text-[#888888] m-0 font-normal;
+    @apply text-[14px] text-muted m-0 font-bold;
   }
 
   .post-detail-cover {
-    @apply w-full overflow-hidden mb-10 bg-[#ececec];
+    @apply w-full overflow-hidden mb-10 bg-surface;
     aspect-ratio: 16 / 10;
   }
 
@@ -314,15 +312,15 @@
   }
 
   .post-content h1 {
-    @apply text-2xl font-semibold mt-10 mb-4 text-[#111111];
+    @apply text-[32px] font-bold mt-10 mb-4 text-ink leading-[1.2];
   }
 
   .post-content h2 {
-    @apply text-xl font-semibold mt-10 mb-4 text-[#111111];
+    @apply text-[24px] font-bold mt-10 mb-4 text-ink leading-[1.3];
   }
 
   .post-content p {
-    @apply text-[16px] leading-[1.85] text-[#333333] mb-5;
+    @apply text-[16px] leading-[1.6] text-secondary mb-5;
   }
 
   .post-content .notion-image img {
@@ -330,7 +328,7 @@
   }
 
   .empty-state {
-    @apply py-16 text-center text-[14px] text-[#888888];
+    @apply py-16 text-center text-[14px] text-muted;
   }
 
   @media (max-width: 900px) {
@@ -350,7 +348,7 @@
       min-height: auto;
       padding-top: clamp(32px, 5vw, 48px);
       border-right: none;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid theme('colors.line');
     }
 
     .title-column:last-child {
