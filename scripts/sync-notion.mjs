@@ -8,6 +8,7 @@ import { execFileSync } from 'node:child_process'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const notionImagesDir = resolve(__dirname, '../public/images/notion')
+const notionFilesDir = resolve(__dirname, '../public/files/notion')
 
 /** 优先读 process.env（Vercel 注入），本地可回退到 .env 文件 */
 function loadEnv() {
@@ -153,6 +154,68 @@ async function localizeImages(html) {
   return result
 }
 
+async function downloadFile(url, name = '') {
+  mkdirSync(notionFilesDir, { recursive: true })
+  const hash = createHash('md5').update(url.split('?')[0]).digest('hex').slice(0, 12)
+  let ext = extname(name)
+  if (!ext) {
+    try {
+      ext = extname(new URL(url).pathname)
+    } catch {
+      ext = ''
+    }
+  }
+  const filename = `${hash}${ext || '.bin'}`
+  const filePath = resolve(notionFilesDir, filename)
+  const localPath = `/files/notion/${filename}`
+
+  if (!existsSync(filePath)) {
+    const res = await fetch(url)
+    if (!res.ok) throw new Error(`Failed to download file: ${res.status}`)
+    await pipeline(res.body, createWriteStream(filePath))
+  }
+
+  return { localPath, filePath, name: name || basename(filename) }
+}
+
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
+
+function resolveFileBlockName(data, url) {
+  if (data.name) return data.name
+  if (data.caption?.length) return richTextToPlain(data.caption)
+
+  try {
+    const pathname = decodeURIComponent(new URL(url).pathname)
+    const fromUrl = basename(pathname.split('?')[0])
+    if (fromUrl && fromUrl !== 'download') return fromUrl
+  } catch {
+    // ignore
+  }
+
+  return 'download'
+}
+
+async function fileBlockToHtml(url, name) {
+  const { localPath, filePath, name: fileName } = await downloadFile(url, name)
+  const lowerName = fileName.toLowerCase()
+  const isMarkdown = /\.(md|markdown)$/.test(lowerName)
+
+  if (isMarkdown) {
+    const markdown = readFileSync(filePath, 'utf8')
+    return `<pre class="notion-raw-file"><code>${escapeHtml(markdown)}</code></pre>`
+  }
+
+  const safeName = escapeHtml(fileName)
+
+  return `<p class="notion-file-wrap"><a class="notion-file" href="${localPath}" download="${safeName}"><span class="notion-file-icon" aria-hidden="true">↓</span><span class="notion-file-meta"><span class="notion-file-name">${safeName}</span><span class="notion-file-hint">点击下载</span></span></a></p>`
+}
+
 async function blocksToHtml(notion, blocks) {
   const parts = []
 
@@ -199,6 +262,22 @@ async function blocksToHtml(notion, blocks) {
         if (url) {
           const alt = richTextToPlain(data.caption) || 'image'
           parts.push(`<figure class="notion-image"><img src="${url}" alt="${alt}" loading="lazy" /></figure>`)
+        }
+        break
+      }
+      case 'file':
+      case 'pdf': {
+        const url = data.file?.url || data.external?.url
+        const name = resolveFileBlockName(data, url)
+        if (!url) break
+        try {
+          parts.push(await fileBlockToHtml(url, name))
+        } catch (err) {
+          console.warn('[notion-sync] file block failed:', err.message)
+          const fallbackName = name || 'download'
+          parts.push(
+            `<p><a href="${url}" target="_blank" rel="noopener noreferrer">${fallbackName}</a></p>`
+          )
         }
         break
       }

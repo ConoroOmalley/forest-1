@@ -447,8 +447,66 @@
     @apply border-l-0 bg-[#f7f7f7] rounded-[12px] p-4;
   }
 
+  .post-content table {
+    @apply w-full mb-6 text-[14px] border-collapse;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .post-content th,
+  .post-content td {
+    @apply border border-[#ebebeb] px-3 py-2 text-left align-top text-secondary;
+  }
+
+  .post-content th {
+    @apply bg-[#f7f7f7] text-ink font-semibold;
+  }
+
   .post-content .notion-image img {
     @apply w-full h-auto rounded-[14px];
+  }
+
+  .post-content pre.notion-raw-file {
+    @apply overflow-x-auto text-[13px] leading-relaxed p-4 bg-[#f7f7f7] rounded-[12px] mb-5 whitespace-pre-wrap break-words;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .post-content pre.notion-raw-file code {
+    @apply bg-transparent p-0 text-inherit whitespace-pre-wrap break-words;
+  }
+
+  .post-content .notion-file-wrap {
+    @apply m-0 mb-5;
+  }
+
+  .post-content .notion-file {
+    @apply inline-flex items-center gap-3 text-[15px] font-medium text-ink no-underline px-4 py-3 bg-[#f7f7f7] rounded-[12px] border border-[#ebebeb] w-full max-w-[420px];
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .post-content .notion-file:hover {
+    @apply bg-[#f0f0f0] border-[#dddddd];
+  }
+
+  .post-content .notion-file:active {
+    transform: scale(0.98);
+  }
+
+  .post-content .notion-file-icon {
+    @apply flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-full bg-[#111111] text-white text-[16px] font-semibold leading-none;
+  }
+
+  .post-content .notion-file-meta {
+    @apply flex flex-col gap-0.5 min-w-0;
+  }
+
+  .post-content .notion-file-name {
+    @apply text-[15px] font-semibold text-ink truncate;
+  }
+
+  .post-content .notion-file-hint {
+    @apply text-[13px] font-normal text-muted;
   }
 
   /* ── Footer ── */
