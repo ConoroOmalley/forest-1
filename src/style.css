@@ -520,6 +520,10 @@
     @apply max-w-[960px] mx-auto flex items-center justify-between gap-4 text-[13px] text-muted;
   }
 
+  .site-footer-pv {
+    @apply max-w-[960px] mx-auto mt-3 text-center text-[13px] text-muted m-0;
+  }
+
   .text-link {
     @apply text-[14px] text-ink underline underline-offset-4 bg-transparent border-0 p-0 cursor-pointer;
   }
