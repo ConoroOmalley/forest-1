@@ -389,6 +389,10 @@
     @apply mb-8;
   }
 
+  .post-content {
+    @apply min-w-0 overflow-x-hidden;
+  }
+
   .post-detail-title {
     @apply text-[clamp(26px,4vw,32px)] font-semibold text-ink leading-[1.2] tracking-[-0.03em] mb-3 m-0;
   }
@@ -407,6 +411,40 @@
 
   .post-content p {
     @apply text-[16px] leading-[1.6] text-secondary mb-5;
+  }
+
+  .post-content ul,
+  .post-content ol {
+    @apply mb-5 pl-5;
+  }
+
+  .post-content li {
+    @apply text-[16px] leading-[1.6] text-secondary mb-2;
+  }
+
+  .post-content a {
+    @apply text-ink underline underline-offset-2 break-words;
+  }
+
+  .post-content pre {
+    @apply overflow-x-auto text-[13px] leading-relaxed p-4 bg-[#f7f7f7] rounded-[12px] mb-5;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .post-content code {
+    @apply text-[14px] bg-[#f5f5f5] px-1.5 py-0.5 rounded break-words;
+  }
+
+  .post-content pre code {
+    @apply bg-transparent p-0 break-normal;
+  }
+
+  .post-content blockquote {
+    @apply border-l-4 border-[#dddddd] pl-4 my-5 text-secondary;
+  }
+
+  .post-content blockquote.callout {
+    @apply border-l-0 bg-[#f7f7f7] rounded-[12px] p-4;
   }
 
   .post-content .notion-image img {
@@ -436,9 +474,80 @@
     .work-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .feed-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 600px) {
+    body {
+      background-size: 100% 320px;
+    }
+
+    .blog-main {
+      padding-left: max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
+      padding-bottom: 32px;
+    }
+
+    .blog-page {
+      @apply pb-8;
+    }
+
+    .blog-page--detail {
+      max-width: 100%;
+    }
+
+    .post-detail-topbar {
+      height: 96px;
+      margin-bottom: 12px;
+      margin-left: -16px;
+      margin-right: -16px;
+      width: calc(100% + 32px);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .post-back-btn {
+      @apply px-3.5 py-2 text-[13px];
+      min-height: 40px;
+    }
+
+    .post-detail-header {
+      @apply mb-6;
+    }
+
+    .post-detail-title {
+      @apply text-[24px] mb-2;
+    }
+
+    .post-detail-meta {
+      @apply text-[13px];
+    }
+
+    .post-content h1 {
+      @apply text-[20px] mt-8 mb-3;
+    }
+
+    .post-content h2 {
+      @apply text-[18px] mt-8 mb-3;
+    }
+
+    .post-content p,
+    .post-content li {
+      @apply text-[15px] leading-[1.65];
+    }
+
+    .post-content pre {
+      @apply text-[12px] p-3 rounded-[10px];
+    }
+
+    .post-content .notion-image img {
+      @apply rounded-[10px];
+    }
+
     .top-nav-inner {
       @apply flex-col items-start justify-center gap-2;
       height: auto;
@@ -450,35 +559,133 @@
       @apply justify-start gap-4;
     }
 
+    .home-page {
+      --home-inset: 0px;
+      padding-top: 24px;
+    }
+
+    .home-page .content-feed,
+    .home-page .profile-panel {
+      padding-left: 0;
+    }
+
+    .profile-hero {
+      @apply mb-8 pt-6;
+    }
+
+    .profile-banner {
+      height: 180px;
+      border-radius: 12px;
+    }
+
     .profile-avatar-wrap {
-      top: -30px;
+      top: -28px;
+    }
+
+    .home-page .profile-avatar-wrap {
+      left: 0;
     }
 
     .profile-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 16px;
-      border-width: 5px;
+      width: 72px;
+      height: 72px;
+      border-radius: 14px;
+      border-width: 4px;
     }
 
     .profile-panel {
-      padding-top: 68px;
+      padding-top: 56px;
     }
 
     .profile-title {
-      @apply text-[22px];
+      @apply text-[26px];
     }
 
-    .home-page {
-      --home-inset: 24px;
+    .profile-bio {
+      @apply text-[15px];
+    }
+
+    .profile-social-tag {
+      font-size: 13px;
+      padding: 5px 8px 5px 5px;
+    }
+
+    .content-feed {
+      @apply rounded-[16px];
+    }
+
+    .feed-header {
+      @apply flex-col items-start gap-3 mb-6;
+    }
+
+    .feed-toolbar {
+      @apply w-full;
+    }
+
+    .feed-tabs {
+      @apply w-full overflow-x-auto;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .feed-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .feed-tab {
+      @apply flex-shrink-0;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+
+    .feed-title {
+      @apply text-[20px];
     }
 
     .feed-grid {
-      grid-template-columns: 1fr;
+      @apply gap-y-6;
+    }
+
+    .feed-card {
+      @apply gap-3;
+    }
+
+    .feed-card-thumb {
+      width: 72px;
+      height: 72px;
+      border-radius: 8px;
+    }
+
+    .feed-card-thumb-emoji {
+      @apply text-[28px];
+    }
+
+    .feed-card-title {
+      @apply text-[15px];
+    }
+
+    .work-section {
+      @apply gap-6 pt-2;
+    }
+
+    .work-section-label {
+      @apply text-[16px];
     }
 
     .work-grid {
       grid-template-columns: 1fr;
+      gap: 20px 0;
+    }
+
+    .work-card-title {
+      @apply text-[14px];
+    }
+
+    .site-footer {
+      padding-left: max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
+      @apply py-6;
     }
 
     .site-footer-bar {
