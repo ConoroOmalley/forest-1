@@ -18,6 +18,7 @@
     background-image: linear-gradient(180deg, #dce4f5 0%, #eef2fa 180px, #ffffff 420px);
     background-repeat: no-repeat;
     background-size: 100% 420px;
+    background-attachment: fixed;
   }
 
   #app {
@@ -77,6 +78,28 @@
 
   .blog-page--detail {
     max-width: 720px;
+  }
+
+  .post-detail-topbar {
+    @apply sticky top-0 z-50 flex items-center justify-center w-full;
+    height: 120px;
+    margin-bottom: 16px;
+  }
+
+  .post-back-btn {
+    @apply inline-flex items-center gap-1 px-4 py-2.5 text-[14px] font-medium text-white border-0 cursor-pointer;
+    background: #111111;
+    border-radius: 999px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .post-back-btn:hover {
+    background: #333333;
+  }
+
+  .post-back-btn:active {
+    transform: scale(0.97);
   }
 
   .home-page {
@@ -309,7 +332,7 @@
   }
 
   .feed-card-title {
-    @apply text-[15px] font-semibold text-ink leading-[1.35] m-0 line-clamp-2 tracking-[-0.01em];
+    @apply text-[16px] font-semibold text-ink leading-[1.35] m-0 line-clamp-2 tracking-[-0.01em];
     transition: color 0.15s ease;
   }
 
@@ -363,7 +386,7 @@
 
   /* ── Post Detail ── */
   .post-detail-header {
-    @apply mb-8 pt-4;
+    @apply mb-8;
   }
 
   .post-detail-title {
@@ -372,15 +395,6 @@
 
   .post-detail-meta {
     @apply text-[14px] text-muted m-0 font-medium;
-  }
-
-  .post-detail-cover {
-    @apply w-full overflow-hidden mb-10 bg-[#f7f7f7] rounded-[14px];
-    aspect-ratio: 16 / 10;
-  }
-
-  .post-detail-cover img {
-    @apply w-full h-full object-cover;
   }
 
   .post-content h1 {

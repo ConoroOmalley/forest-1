@@ -5,9 +5,7 @@ import { getPostBySlug } from '@/data/posts'
 import {
   formatWorkMeta,
   resolveBackRouteFromQuery,
-  resolveCardMedia,
   resolveProjectExternalUrl,
-  shouldShowDetailCover,
 } from '@/lib/notion-mapper'
 
 const route = useRoute()
@@ -18,8 +16,6 @@ const post = computed(() => {
   const id = typeof route.query.id === 'string' ? route.query.id : undefined
   return getPostBySlug(slug, id)
 })
-const media = computed(() => (post.value ? resolveCardMedia(post.value) : null))
-const showCover = computed(() => (post.value ? shouldShowDetailCover(post.value) : false))
 const metaLabel = computed(() => (post.value ? formatWorkMeta(post.value) : ''))
 
 const externalUrl = computed(() =>
@@ -45,24 +41,24 @@ function goBack() {
 
 <template>
   <div v-if="post && !externalUrl" class="blog-page blog-page--detail">
-    <button class="text-link mb-8" @click="goBack">← 返回</button>
+    <div class="post-detail-topbar">
+      <button class="post-back-btn" @click="goBack">← 返回</button>
+    </div>
 
     <header class="post-detail-header">
       <h1 class="post-detail-title">{{ post.title }}</h1>
       <p class="post-detail-meta">{{ metaLabel }}</p>
     </header>
 
-    <div v-if="showCover && media?.coverImage" class="post-detail-cover">
-      <img :src="media.coverImage" :alt="post.title" />
-    </div>
-
     <div class="post-content" v-html="post.content ?? ''" />
   </div>
 
-  <div v-else class="blog-page">
+  <div v-else class="blog-page blog-page--detail">
+    <div class="post-detail-topbar">
+      <button class="post-back-btn" @click="goBack">← 返回</button>
+    </div>
     <section class="empty-state">
       <p class="mb-4">内容不存在</p>
-      <button class="text-link" @click="goBack">返回</button>
     </section>
   </div>
 </template>

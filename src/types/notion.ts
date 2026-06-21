@@ -7,6 +7,7 @@ export type NotionEntryType =
   | 'Menu'
   | 'SubMenu'
   | 'photo'
+  | 'ziliao'
 
 /** Notion 数据库 status 列 */
 export type NotionEntryStatus = 'Published' | 'Invisible' | 'Draft'
@@ -30,7 +31,7 @@ export type NotionEntryStatus = 'Published' | 'Invisible' | 'Draft'
  * | URL        | url        |
  *
  * Menu：status=Published 且 type=Menu → 左侧导航
- * belong：内容归属菜单（文章 / 课程 / 摄影…）
+ * belong：内容归属菜单（文章 / 课程 / 摄影 / 资料…）
  * slug：菜单跳转路径（# 时按 title 映射站内路由）
  * 正文 content 来自 Notion 页面块，不在表格列中。
  */
@@ -45,6 +46,8 @@ export interface NotionEntry {
   tags: string[]
   slug: string
   date: string
+  /** Notion 页面最后编辑时间，用于同日内容排序 */
+  lastEditedTime?: string
   belong?: string
   password?: string
   icon?: string

@@ -231,12 +231,25 @@ function slugify(text) {
     .slice(0, 60)
 }
 
-function findFirstImageUrl(blocks) {
+function findFirstImageInHtml(html) {
+  const match = html.match(/<img[^>]+src="([^"]+)"/)
+  return match?.[1]
+}
+
+async function findFirstImageUrlDeep(notion, blocks) {
   for (const block of blocks) {
     if (block.type === 'image') {
-      return block.image?.external?.url || block.image?.file?.url
+      const url = block.image?.external?.url || block.image?.file?.url
+      if (url) return { url, external: !!block.image?.external?.url }
+    }
+
+    if (block.has_children) {
+      const children = await fetchAllBlocks(notion, block.id)
+      const nested = await findFirstImageUrlDeep(notion, children)
+      if (nested) return nested
     }
   }
+
   return undefined
 }
 
@@ -250,33 +263,31 @@ async function resolveIconUrl(url, preferRemote, { force = false } = {}) {
   }
 }
 
-/** 卡片封面：icon 列 → 页面 cover → 页面 icon → 正文首图 */
-async function resolveEntryIcon(page, blocks, iconColumn) {
-  const columnIcon = iconColumn?.trim()
-
-  if (columnIcon) {
-    if (columnIcon.startsWith('http')) return columnIcon
-    return columnIcon
-  }
-
+/** 卡片封面：页面 cover → 正文首图 → 页面 icon（emoji/图片） */
+async function resolveEntryCover(notion, page, blocks, contentHtml) {
   const coverUrl = page.cover?.external?.url || page.cover?.file?.url
   if (coverUrl) {
     return resolveIconUrl(coverUrl, page.cover?.type === 'external')
+  }
+
+  const firstBlockImg = await findFirstImageUrlDeep(notion, blocks)
+  if (firstBlockImg) {
+    return resolveIconUrl(firstBlockImg.url, firstBlockImg.external)
+  }
+
+  const htmlImg = findFirstImageInHtml(contentHtml)
+  if (htmlImg && isImageUrl(htmlImg)) {
+    if (htmlImg.startsWith('/images/notion/')) return htmlImg
+    return resolveIconUrl(htmlImg, htmlImg.startsWith('http') && !htmlImg.includes('notion'))
   }
 
   if (page.icon?.type === 'emoji') {
     return page.icon.emoji
   }
 
-  const pageIconUrl = page.icon?.external?.url || page.icon?.file?.url
+  const pageIconUrl = extractPageIconUrl(page.icon)
   if (pageIconUrl) {
     return resolveIconUrl(pageIconUrl, page.icon?.type === 'external')
-  }
-
-  const firstImg = findFirstImageUrl(blocks)
-  if (firstImg) {
-    const imageBlock = blocks.find((b) => b.type === 'image')
-    return resolveIconUrl(firstImg, !!imageBlock?.image?.external?.url)
   }
 
   return undefined
@@ -455,6 +466,7 @@ function mapPageToEntry(page, contentHtml, icon) {
     tags,
     slug,
     date,
+    lastEditedTime: page.last_edited_time,
     belong: resolvedBelong,
     password,
     icon,
@@ -511,10 +523,9 @@ export async function syncNotion() {
 
   for (const page of pages) {
     const blocks = await fetchAllBlocks(notion, page.id)
-    const iconColumn = richTextToPlain(page.properties?.icon?.rich_text)
-    const icon = await resolveEntryIcon(page, blocks, iconColumn)
     let content = await blocksToHtml(notion, blocks)
     content = await localizeImages(content)
+    const icon = await resolveEntryCover(notion, page, blocks, content)
     entries.push(mapPageToEntry(page, content, icon))
   }
 

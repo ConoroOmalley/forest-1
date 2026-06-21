@@ -26,6 +26,9 @@ export const projects = getEntriesByBelong(notionEntries, '项目')
 /** 设计书籍：belong = 书籍 */
 export const designBooks = getEntriesByBelong(notionEntries, '书籍')
 
+/** 资料：belong = 资料 */
+export const resources = getEntriesByBelong(notionEntries, '资料')
+
 /** 摄影菜单内容：type = photo */
 export const photos = getPhotoEntries(notionEntries)
 

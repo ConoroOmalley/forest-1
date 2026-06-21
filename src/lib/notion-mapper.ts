@@ -2,9 +2,27 @@ import type { NotionEntry } from '@/types/notion'
 
 /** 解析 Notion date 列（YYYY/MM/DD 或 YYYY-MM-DD） */
 export function parseNotionDate(dateStr: string): Date {
-  const normalized = dateStr.replace(/\//g, '-')
-  const [y, m, d] = normalized.split('-').map(Number)
+  if (!dateStr) return new Date(0)
+
+  const datePart = dateStr.replace(/\//g, '-').slice(0, 10)
+  const [y, m, d] = datePart.split('-').map(Number)
+  if (!y || !m || !d) return new Date(0)
+
   return new Date(y, m - 1, d)
+}
+
+/** 内容列表：date 倒序，同日按 lastEditedTime 倒序 */
+export function compareEntriesByDateDesc(a: NotionEntry, b: NotionEntry): number {
+  const dateDiff = parseNotionDate(b.date).getTime() - parseNotionDate(a.date).getTime()
+  if (dateDiff !== 0) return dateDiff
+
+  const editA = a.lastEditedTime ? new Date(a.lastEditedTime).getTime() : 0
+  const editB = b.lastEditedTime ? new Date(b.lastEditedTime).getTime() : 0
+  return editB - editA
+}
+
+export function sortEntriesByDateDesc(entries: NotionEntry[]): NotionEntry[] {
+  return [...entries].sort(compareEntriesByDateDesc)
 }
 
 /** 卡片底部日期展示 */
@@ -78,9 +96,8 @@ export interface CardMedia {
 }
 
 /**
- * icon 列 → 卡片右侧媒体
- * - URL / 本地路径 → 图片卡片
- * - 空 → 从 title 提取 emoji，否则默认 📄
+ * 卡片封面图（同步时写入 icon 字段）
+ * - 页面 cover → 正文首图 → emoji 占位
  */
 export function resolveCardMedia(entry: NotionEntry): CardMedia {
   const icon = entry.icon?.trim()
@@ -118,16 +135,16 @@ export function isPublishedContent(entry: NotionEntry): boolean {
 
 /** 按 belong 筛选菜单下的内容，按 date 降序 */
 export function getEntriesByBelong(entries: NotionEntry[], belong: string): NotionEntry[] {
-  return entries
-    .filter((entry) => isPublishedContent(entry) && resolveBelong(entry) === belong)
-    .sort((a, b) => parseNotionDate(b.date).getTime() - parseNotionDate(a.date).getTime())
+  return sortEntriesByDateDesc(
+    entries.filter((entry) => isPublishedContent(entry) && resolveBelong(entry) === belong)
+  )
 }
 
 /** 摄影页：type=photo 且 status=Published，按 date 降序 */
 export function getPhotoEntries(entries: NotionEntry[]): NotionEntry[] {
-  return entries
-    .filter((entry) => entry.status === 'Published' && entry.type === 'photo')
-    .sort((a, b) => parseNotionDate(b.date).getTime() - parseNotionDate(a.date).getTime())
+  return sortEntriesByDateDesc(
+    entries.filter((entry) => entry.status === 'Published' && entry.type === 'photo')
+  )
 }
 export function isPublishedMenu(entry: NotionEntry): boolean {
   return entry.type === 'Menu' && entry.status === 'Published'
