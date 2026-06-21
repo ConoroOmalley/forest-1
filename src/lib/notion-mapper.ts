@@ -25,9 +25,38 @@ export function formatDateLabel(dateStr: string): string {
 
 /** 活动/课程列表日期：3月22日周日 */
 export function formatEventDate(dateStr: string): string {
-  const date = parseNotionDate(dateStr)
+  const { date, weekday } = formatTimelineDateParts(dateStr)
+  return `${date} ${weekday}`
+}
+
+/** 时间线日期拆分：6月26日 + 星期五 */
+export function formatTimelineDateParts(dateStr: string): { date: string; weekday: string } {
+  const dateObj = parseNotionDate(dateStr)
+  const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+  return {
+    date: `${dateObj.getMonth() + 1}月${dateObj.getDate()}日`,
+    weekday: weekdays[dateObj.getDay()],
+  }
+}
+
+/** 卡片顶部日期：今天 / 6月24日周三 */
+export function formatTimelineEntryMeta(entry: NotionEntry): string {
+  const dateObj = parseNotionDate(entry.date)
+  const today = new Date()
+  const isToday =
+    dateObj.getFullYear() === today.getFullYear() &&
+    dateObj.getMonth() === today.getMonth() &&
+    dateObj.getDate() === today.getDate()
+
+  if (isToday) return '今天'
+
   const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
-  return `${date.getMonth() + 1}月${date.getDate()}日${weekdays[date.getDay()]}`
+  return `${dateObj.getMonth() + 1}月${dateObj.getDate()}日${weekdays[dateObj.getDay()]}`
+}
+
+/** 卡片底部位置/标签（不含分类） */
+export function formatTimelineLocation(entry: NotionEntry): string | null {
+  return entry.tags.length ? entry.tags.join(' · ') : null
 }
 
 /** 作品卡片元信息：分类, 年份 */
@@ -172,9 +201,10 @@ export function extractUrlOnlyFromContent(html: string): string | null {
   return urlMatch?.[1] ?? null
 }
 
-/** belong=项目 且正文只有网址时，返回外链地址 */
+/** belong=项目 时，优先用 URL 列，其次正文仅含网址 */
 export function resolveProjectExternalUrl(entry: NotionEntry): string | null {
   if (entry.belong !== '项目') return null
+  if (entry.url) return entry.url
   return extractUrlOnlyFromContent(entry.content ?? '')
 }
 
@@ -284,6 +314,7 @@ export function resolveBackRoute(entry: NotionEntry): string {
 }
 
 const FROM_ROUTES: Record<string, string> = {
+  home: '/',
   photography: '/photography',
   courses: '/courses',
   articles: '/articles',

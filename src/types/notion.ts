@@ -27,6 +27,7 @@ export type NotionEntryStatus = 'Published' | 'Invisible' | 'Draft'
  * | password   | password   |
  * | icon       | icon       |
  * | belong     | belong     |
+ * | URL        | url        |
  *
  * Menu：status=Published 且 type=Menu → 左侧导航
  * belong：内容归属菜单（文章 / 课程 / 摄影…）
@@ -47,6 +48,7 @@ export interface NotionEntry {
   belong?: string
   password?: string
   icon?: string
+  url?: string
   content?: string
 }
 
@@ -57,9 +59,12 @@ export interface NavIntroPart {
 
 export interface BlogConfig {
   label: string
+  /** 个人简介，来自 Notion 数据库页「添加描述」 */
   description: string
   avatar: string
+  /** 首页顶部 banner，来自 Notion 表格页 cover */
+  banner?: string
   totalReads: string
-  /** 左侧导航段落：灰字阅读 + menu 黑字链接 */
-  navIntro: NavIntroPart[][]
+  /** @deprecated 旧版导航段落，新同步不再写入 */
+  navIntro?: NavIntroPart[][]
 }

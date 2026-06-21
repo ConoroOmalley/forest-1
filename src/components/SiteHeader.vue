@@ -25,28 +25,19 @@ function isActive(href: string) {
 </script>
 
 <template>
-  <header class="site-header">
-    <div class="site-header-inner">
-      <router-link to="/" class="site-identity">
-        <img
-          :src="blogConfig.avatar"
-          :alt="blogConfig.label"
-          width="40"
-          height="40"
-          class="site-identity-avatar"
-        />
-        <span class="site-identity-text">
-          <span class="site-identity-name">{{ blogConfig.label }}</span>
-          <span class="site-identity-role">{{ blogConfig.description }}</span>
-        </span>
-      </router-link>
+  <header class="top-nav">
+    <div class="top-nav-inner">
+      <router-link to="/" class="top-nav-brand">{{ blogConfig.label }}</router-link>
 
-      <nav class="site-nav" aria-label="主导航">
+      <nav class="top-nav-links" aria-label="主导航">
+        <router-link to="/" class="top-nav-link" :class="{ 'top-nav-link--active': route.name === 'Home' }">
+          首页
+        </router-link>
         <template v-for="item in navItems" :key="item.href + item.title">
           <a
             v-if="item.external"
             :href="item.href"
-            class="site-nav-link"
+            class="top-nav-link"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -55,8 +46,8 @@ function isActive(href: string) {
           <router-link
             v-else
             :to="item.href"
-            class="site-nav-link"
-            :class="{ 'site-nav-link--active': isActive(item.href) }"
+            class="top-nav-link"
+            :class="{ 'top-nav-link--active': isActive(item.href) }"
           >
             {{ item.title }}
           </router-link>

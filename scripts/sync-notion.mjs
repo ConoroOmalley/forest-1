@@ -1,9 +1,10 @@
 import { Client } from '@notionhq/client'
 import { readFileSync, writeFileSync, mkdirSync, createWriteStream, existsSync } from 'node:fs'
-import { resolve, dirname, extname } from 'node:path'
+import { resolve, dirname, extname, basename } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
 import { pipeline } from 'node:stream/promises'
+import { execFileSync } from 'node:child_process'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const notionImagesDir = resolve(__dirname, '../public/images/notion')
@@ -71,7 +72,41 @@ async function fetchAllBlocks(notion, blockId) {
   return blocks
 }
 
-async function downloadImage(url) {
+/** HEIC/HEIF 浏览器不支持，转为 JPG（macOS 用 sips） */
+function convertHeicToJpg(filePath, maxSize = 512) {
+  const ext = extname(filePath).toLowerCase()
+  if (ext !== '.heic' && ext !== '.heif') return filePath
+
+  const jpgPath = filePath.replace(/\.(heic|heif)$/i, '.jpg')
+  if (existsSync(jpgPath)) return jpgPath
+
+  if (process.platform === 'darwin') {
+    try {
+      const args = ['-s', 'format', 'jpeg', '-Z', String(maxSize), filePath, '--out', jpgPath]
+      execFileSync('sips', args, { stdio: 'ignore' })
+      if (existsSync(jpgPath)) return jpgPath
+    } catch (err) {
+      console.warn('[notion-sync] HEIC convert failed:', err.message)
+    }
+  } else {
+    console.warn('[notion-sync] HEIC image skipped (no converter on this platform):', filePath)
+  }
+
+  return filePath
+}
+
+function toWebImagePath(filePath) {
+  return `/images/notion/${basename(filePath)}`
+}
+
+function ensureWebImagePath(webPath, maxSize = 512) {
+  if (!webPath?.startsWith('/images/notion/')) return webPath
+  const filePath = resolve(notionImagesDir, basename(webPath))
+  if (!existsSync(filePath)) return webPath
+  return toWebImagePath(convertHeicToJpg(filePath, maxSize))
+}
+
+async function downloadImage(url, { force = false } = {}) {
   mkdirSync(notionImagesDir, { recursive: true })
   const hash = createHash('md5').update(url.split('?')[0]).digest('hex').slice(0, 12)
   let ext = '.jpg'
@@ -86,17 +121,19 @@ async function downloadImage(url) {
   const localPath = `/images/notion/${filename}`
   const filePath = resolve(notionImagesDir, filename)
 
-  try {
-    readFileSync(filePath)
-    return localPath
-  } catch {
-    // not cached yet
+  if (!force) {
+    try {
+      readFileSync(filePath)
+      return toWebImagePath(convertHeicToJpg(filePath))
+    } catch {
+      // not cached yet
+    }
   }
 
   const res = await fetch(url)
   if (!res.ok) throw new Error(`Failed to download image: ${res.status}`)
   await pipeline(res.body, createWriteStream(filePath))
-  return localPath
+  return toWebImagePath(convertHeicToJpg(filePath))
 }
 
 async function localizeImages(html) {
@@ -204,10 +241,10 @@ function findFirstImageUrl(blocks) {
 }
 
 /** 外部 URL 直接用于卡片封面；Notion 托管文件则下载到本地 */
-async function resolveIconUrl(url, preferRemote) {
+async function resolveIconUrl(url, preferRemote, { force = false } = {}) {
   if (preferRemote) return url
   try {
-    return await downloadImage(url)
+    return await downloadImage(url, { force })
   } catch {
     return url
   }
@@ -245,6 +282,148 @@ async function resolveEntryIcon(page, blocks, iconColumn) {
   return undefined
 }
 
+function isImageUrl(url) {
+  return typeof url === 'string' && (url.startsWith('http') || url.startsWith('/'))
+}
+
+function readAvatarProperty(page) {
+  const prop = page.properties?.avatar
+  if (!prop) return undefined
+
+  if (prop.type === 'files' && prop.files?.length) {
+    const file = prop.files[0]
+    return file.external?.url || file.file?.url
+  }
+  if (prop.type === 'url' && prop.url) return prop.url
+  if (prop.type === 'rich_text') {
+    const text = richTextToPlain(prop.rich_text).trim()
+    if (text) return text
+  }
+  return undefined
+}
+
+function extractPageIconUrl(icon) {
+  if (!icon) return undefined
+  switch (icon.type) {
+    case 'external':
+      return icon.external?.url
+    case 'file':
+      return icon.file?.url
+    case 'custom_emoji':
+      return icon.custom_emoji?.url
+    default:
+      return undefined
+  }
+}
+
+async function fetchDatabaseMeta(databaseId, token) {
+  const headers = (version) => ({
+    Authorization: `Bearer ${token}`,
+    'Notion-Version': version,
+  })
+
+  const [legacyRes, modernRes] = await Promise.all([
+    fetch(`https://api.notion.com/v1/databases/${databaseId}`, {
+      headers: headers('2022-06-28'),
+    }),
+    fetch(`https://api.notion.com/v1/databases/${databaseId}`, {
+      headers: headers('2025-09-03'),
+    }),
+  ])
+
+  if (!legacyRes.ok && !modernRes.ok) {
+    throw new Error(`Database meta fetch failed: ${legacyRes.status}/${modernRes.status}`)
+  }
+
+  const legacy = legacyRes.ok ? await legacyRes.json() : {}
+  const modern = modernRes.ok ? await modernRes.json() : {}
+
+  // 2022 能读到 custom_emoji icon；2025 能读到 cover，合并两者
+  return {
+    ...legacy,
+    ...modern,
+    icon: modern.icon ?? legacy.icon,
+    cover: modern.cover ?? legacy.cover,
+  }
+}
+
+async function resolvePageMediaUrl(media, preferRemote, { force = false } = {}) {
+  if (!media) return undefined
+  const url = extractPageIconUrl(media) || media.external?.url || media.file?.url
+  if (!url) return undefined
+  return resolveIconUrl(url, preferRemote ?? media.type === 'external', { force })
+}
+
+/** 博客头像：表格页 icon → avatar 列 → 同名条目（不用 cover，cover 留给 banner） */
+async function resolveBlogAvatar(dbMeta, databaseTitle, databaseDescription, pages, entries) {
+  const iconUrl = extractPageIconUrl(dbMeta.icon)
+  if (iconUrl) {
+    const local = await resolveIconUrl(iconUrl, false)
+    return ensureWebImagePath(local)
+  }
+
+  let avatarFromRow
+  for (const page of pages) {
+    const raw = readAvatarProperty(page)
+    if (!isImageUrl(raw)) continue
+
+    const type = page.properties?.type?.select?.name
+    const resolved = raw.startsWith('http')
+      ? await resolveIconUrl(raw, !raw.includes('notion'))
+      : raw
+
+    if (type === 'Config') return ensureWebImagePath(resolved)
+    avatarFromRow ??= resolved
+  }
+  if (avatarFromRow) return ensureWebImagePath(avatarFromRow)
+
+  const titledEntry = entries.find(
+    (entry) => entry.title === databaseTitle && isImageUrl(entry.icon)
+  )
+  if (titledEntry?.icon) return ensureWebImagePath(titledEntry.icon)
+
+  const profileEntry = entries.find(
+    (entry) =>
+      entry.type === 'Page' &&
+      isImageUrl(entry.icon) &&
+      databaseDescription &&
+      databaseDescription.includes(entry.title.replace(/的人$/, ''))
+  )
+  if (profileEntry?.icon) return ensureWebImagePath(profileEntry.icon)
+
+  const noticeEntry = entries.find((entry) => entry.type === 'Notice')
+  if (noticeEntry?.content) {
+    const match = noticeEntry.content.match(/<img src="([^"]+)"/)
+    if (match && isImageUrl(match[1])) return ensureWebImagePath(match[1])
+  }
+
+  return '/images/avatar.png'
+}
+
+/** 首页 banner：表格页 cover → Config/同名条目 cover（每次同步强制拉取最新） */
+async function resolveBlogBanner(dbMeta, databaseTitle, pages) {
+  const pageCover = await resolvePageMediaUrl(
+    dbMeta.cover,
+    dbMeta.cover?.type === 'external',
+    { force: true }
+  )
+  if (pageCover) return ensureWebImagePath(pageCover, 4096)
+
+  for (const page of pages) {
+    const coverUrl = page.cover?.external?.url || page.cover?.file?.url
+    if (!coverUrl) continue
+
+    const type = page.properties?.type?.select?.name
+    const title = richTextToPlain(page.properties?.title?.title)
+    if (type !== 'Config' && title !== databaseTitle) continue
+
+    const local = await resolveIconUrl(coverUrl, page.cover?.type === 'external', { force: true })
+    return ensureWebImagePath(local, 4096)
+  }
+
+  return undefined
+}
+
 function mapPageToEntry(page, contentHtml, icon) {
   const p = page.properties
 
@@ -258,8 +437,13 @@ function mapPageToEntry(page, contentHtml, icon) {
   const slug = slugRaw || slugify(title) || page.id.replace(/-/g, '')
   const password = richTextToPlain(p.password?.rich_text) || undefined
   const belong = p.belong?.select?.name || undefined
+  const url = p.URL?.url || undefined
   const dateStart = p.date?.date?.start ?? page.created_time?.slice(0, 10)
   const date = dateStart.replace(/-/g, '/')
+
+  const resolvedBelong =
+    belong ||
+    (type === 'Post' && status === 'Published' ? (url ? '项目' : '文章') : undefined)
 
   return {
     id: page.id,
@@ -271,9 +455,10 @@ function mapPageToEntry(page, contentHtml, icon) {
     tags,
     slug,
     date,
-    belong,
+    belong: resolvedBelong,
     password,
     icon,
+    url,
     content: contentHtml,
   }
 }
@@ -315,9 +500,12 @@ export async function syncNotion() {
   const notion = new Client({ auth: env.NOTION_TOKEN })
 
   const db = await notion.databases.retrieve({ database_id: env.NOTION_DATABASE_ID })
+  const dbMeta = await fetchDatabaseMeta(env.NOTION_DATABASE_ID, env.NOTION_TOKEN)
   const dataSourceId = db.data_sources?.[0]?.id
   if (!dataSourceId) throw new Error('No data source found on database')
 
+  const databaseTitle = richTextToPlain(dbMeta.title ?? db.title) || 'Blog'
+  const databaseDescription = richTextToPlain(dbMeta.description ?? db.description) || ''
   const pages = await queryAllPages(notion, dataSourceId)
   const entries = []
 
@@ -331,24 +519,21 @@ export async function syncNotion() {
   }
 
   const normalizedEntries = dedupeSlugs(entries)
+  const avatar = await resolveBlogAvatar(
+    dbMeta,
+    databaseTitle,
+    databaseDescription,
+    pages,
+    normalizedEntries
+  )
+  const banner = await resolveBlogBanner(dbMeta, databaseTitle, pages)
 
   const blogConfig = {
-    label: richTextToPlain(db.title) || 'Blog',
-    description: richTextToPlain(db.description) || '',
-    avatar: '/images/avatar.png',
+    label: databaseTitle,
+    description: databaseDescription,
+    avatar,
+    ...(banner ? { banner } : {}),
     totalReads: '2.4万',
-    navIntro: [
-      [{ kind: 'text', value: '来自互联网的用户体验设计师，' }],
-      [
-        { kind: 'text', value: '目前从事' },
-        { kind: 'highlight', value: 'AI产品设计' },
-        { kind: 'text', value: '，偶尔写点' },
-        { kind: 'menu', value: '文章' },
-        { kind: 'text', value: '，或者拍拍' },
-        { kind: 'menu', value: '摄影' },
-        { kind: 'text', value: '。' },
-      ],
-    ],
   }
 
   const output = {
