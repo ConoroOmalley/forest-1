@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { NotionEntry } from '@/types/notion'
-import { parseNotionDate } from '@/lib/notion-mapper'
+import { sortEntriesByDateDesc } from '@/lib/notion-mapper'
 import WorkGridItem from './WorkGridItem.vue'
 
 const props = defineProps<{
@@ -10,9 +10,7 @@ const props = defineProps<{
 }>()
 
 const sortedEntries = computed(() => {
-  const sorted = [...props.entries].sort(
-    (a, b) => parseNotionDate(b.date).getTime() - parseNotionDate(a.date).getTime()
-  )
+  const sorted = sortEntriesByDateDesc(props.entries)
   return props.limit ? sorted.slice(0, props.limit) : sorted
 })
 </script>
