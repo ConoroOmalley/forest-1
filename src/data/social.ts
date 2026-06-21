@@ -6,6 +6,13 @@ export interface SocialLink {
   tooltip: string
 }
 
+/** 首页右上角「一起聊」按钮，直接在此修改二维码图片 */
+export const chatLink = {
+  label: '一起聊',
+  qrCode: '/images/social/wechat-qr.png',
+  hint: '微信扫码',
+}
+
 /** 首页自媒体标签，直接在此修改链接与提示文案 */
 export const socialLinks: SocialLink[] = [
   {

@@ -514,20 +514,53 @@ async function resolveBlogBanner(dbMeta, databaseTitle, pages) {
   return undefined
 }
 
+function readUrlProperty(properties) {
+  for (const prop of Object.values(properties ?? {})) {
+    if (prop?.type === 'url' && prop.url) return prop.url
+  }
+  return undefined
+}
+
+function readCategoryProperty(properties) {
+  const prop = properties?.category
+  if (!prop) return []
+
+  if (prop.type === 'multi_select') {
+    return (prop.multi_select ?? []).map((item) => item.name).filter(Boolean)
+  }
+
+  if (prop.type === 'select' && prop.select?.name) {
+    return [prop.select.name]
+  }
+
+  return []
+}
+
+function formatResourceTitleFromUrl(url) {
+  try {
+    const normalized = /^https?:\/\//i.test(url) ? url : `https://${url}`
+    const { hostname } = new URL(normalized)
+    return hostname.replace(/^www\./i, '')
+  } catch {
+    return url
+  }
+}
+
 function mapPageToEntry(page, contentHtml, icon) {
   const p = page.properties
 
   const type = p.type?.select?.name ?? 'Post'
-  const title = richTextToPlain(p.title?.title)
+  let title = richTextToPlain(p.title?.title)
   const summary = richTextToPlain(p.summary?.rich_text)
   const status = p.status?.select?.name ?? 'Draft'
-  const category = p.category?.select?.name ? [p.category.select.name] : []
+  const category = readCategoryProperty(p)
   const tags = (p.tags?.multi_select ?? []).map((t) => t.name)
   const slugRaw = richTextToPlain(p.slug?.rich_text)
+  const url = readUrlProperty(p)
+  if (!title && url) title = formatResourceTitleFromUrl(url)
   const slug = slugRaw || slugify(title) || page.id.replace(/-/g, '')
   const password = richTextToPlain(p.password?.rich_text) || undefined
   const belong = p.belong?.select?.name || undefined
-  const url = p.URL?.url || undefined
   const dateStart = p.date?.date?.start ?? page.created_time?.slice(0, 10)
   const date = dateStart.replace(/-/g, '/')
 
@@ -601,10 +634,20 @@ export async function syncNotion() {
   const entries = []
 
   for (const page of pages) {
-    const blocks = await fetchAllBlocks(notion, page.id)
-    let content = await blocksToHtml(notion, blocks)
-    content = await localizeImages(content)
-    const icon = await resolveEntryCover(notion, page, blocks, content)
+    const pageType = page.properties?.type?.select?.name
+    let blocks = []
+    let content = ''
+    let icon
+
+    if (pageType === 'ziyuan') {
+      icon = await resolveEntryCover(notion, page, blocks, content)
+    } else {
+      blocks = await fetchAllBlocks(notion, page.id)
+      content = await blocksToHtml(notion, blocks)
+      content = await localizeImages(content)
+      icon = await resolveEntryCover(notion, page, blocks, content)
+    }
+
     entries.push(mapPageToEntry(page, content, icon))
   }
 

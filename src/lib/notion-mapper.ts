@@ -100,6 +100,11 @@ export interface CardMedia {
  * - 页面 cover → 正文首图 → emoji 占位
  */
 export function resolveCardMedia(entry: NotionEntry): CardMedia {
+  if (entry.type === 'ziyuan' || entry.belong === '资源') {
+    const favicon = resolveResourceFavicon(entry)
+    if (favicon) return { mode: 'image', coverImage: favicon, thumbnail: '' }
+  }
+
   const icon = entry.icon?.trim()
   if (icon && (icon.startsWith('http') || icon.startsWith('/'))) {
     return { mode: 'image', coverImage: icon, thumbnail: '' }
@@ -170,6 +175,7 @@ export function resolveMenuHref(entry: NotionEntry): string {
     文章: '/articles',
     课程: '/courses',
     摄影: '/photography',
+    资源: '/resources',
   }
 
   if (titleRoutes[title]) {
@@ -221,8 +227,88 @@ export function extractUrlOnlyFromContent(html: string): string | null {
 /** belong=项目 时，优先用 URL 列，其次正文仅含网址 */
 export function resolveProjectExternalUrl(entry: NotionEntry): string | null {
   if (entry.belong !== '项目') return null
-  if (entry.url) return entry.url
-  return extractUrlOnlyFromContent(entry.content ?? '')
+  if (entry.url) return normalizeExternalUrl(entry.url)
+  const fromContent = extractUrlOnlyFromContent(entry.content ?? '')
+  return fromContent ? normalizeExternalUrl(fromContent) : null
+}
+
+export function normalizeExternalUrl(url: string): string {
+  const trimmed = url.trim()
+  if (!trimmed) return trimmed
+  return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`
+}
+
+export function resolveResourceUrl(entry: NotionEntry): string | null {
+  if (entry.type !== 'ziyuan' && entry.belong !== '资源') return null
+  if (!entry.url) return null
+  return normalizeExternalUrl(entry.url)
+}
+
+export function resolveResourceTitle(entry: NotionEntry): string {
+  if (entry.title.trim()) return entry.title.trim()
+
+  const url = resolveResourceUrl(entry)
+  if (!url) return '未命名资源'
+
+  try {
+    const { hostname } = new URL(url)
+    return hostname.replace(/^www\./i, '')
+  } catch {
+    return url
+  }
+}
+
+export function resolveResourceFavicon(entry: NotionEntry): string | null {
+  const url = resolveResourceUrl(entry)
+  if (!url) return null
+
+  try {
+    const { hostname } = new URL(url)
+    return `https://www.google.com/s2/favicons?domain=${hostname}&sz=128`
+  } catch {
+    return null
+  }
+}
+
+export function resolveResourceCategory(entry: NotionEntry): string | null {
+  return entry.category[0] ?? null
+}
+
+export function collectResourceCategories(entries: NotionEntry[]): string[] {
+  return groupResourcesByCategory(entries).map((group) => group.category)
+}
+
+const RESOURCE_CATEGORY_ORDER = [
+  '设计博客',
+  '优秀交互',
+  '设计资源',
+  '动效工具',
+  'AI工具',
+  'AI设计工具',
+  '网站开发',
+  '设计哲学',
+  'AI设计资产',
+]
+
+export function groupResourcesByCategory(
+  entries: NotionEntry[]
+): { category: string; entries: NotionEntry[] }[] {
+  const map = new Map<string, NotionEntry[]>()
+
+  for (const entry of entries) {
+    const category = resolveResourceCategory(entry) ?? '其他'
+    if (!map.has(category)) map.set(category, [])
+    map.get(category)!.push(entry)
+  }
+
+  const sortIndex = (category: string) => {
+    const index = RESOURCE_CATEGORY_ORDER.indexOf(category)
+    return index === -1 ? RESOURCE_CATEGORY_ORDER.length : index
+  }
+
+  return [...map.entries()]
+    .sort(([a], [b]) => sortIndex(a) - sortIndex(b) || a.localeCompare(b, 'zh-CN'))
+    .map(([category, groupEntries]) => ({ category, entries: groupEntries }))
 }
 
 export interface EntryLink {
@@ -247,6 +333,11 @@ export function resolveEntryLink(entry: NotionEntry): EntryLink {
       href: `/post/${entry.slug}`,
       route: { path: `/post/${entry.slug}`, query: { from: 'courses' } },
     }
+  }
+
+  const resourceUrl = resolveResourceUrl(entry)
+  if (resourceUrl) {
+    return { external: true, href: resourceUrl }
   }
 
   const externalUrl = resolveProjectExternalUrl(entry)
@@ -325,6 +416,7 @@ export function collectPhotosFromEntry(entry: NotionEntry): PhotoItem[] {
 export function resolveBackRoute(entry: NotionEntry): string {
   if (entry.type === 'photo') return '/photography'
   if (entry.belong === '课程') return '/courses'
+  if (entry.belong === '资源') return '/resources'
   if (entry.belong === '摄影') return '/photography'
   if (entry.belong === '项目') return '/'
   return '/articles'
@@ -335,6 +427,7 @@ const FROM_ROUTES: Record<string, string> = {
   photography: '/photography',
   courses: '/courses',
   articles: '/articles',
+  resources: '/resources',
 }
 
 export function resolveBackRouteFromQuery(from?: string, entry?: NotionEntry): string {

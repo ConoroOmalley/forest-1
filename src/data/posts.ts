@@ -27,7 +27,13 @@ export const projects = getEntriesByBelong(notionEntries, '项目')
 export const designBooks = getEntriesByBelong(notionEntries, '书籍')
 
 /** 资料：belong = 资料 */
-export const resources = getEntriesByBelong(notionEntries, '资料')
+export const materials = getEntriesByBelong(notionEntries, '资料')
+
+/** 资源链接：belong = 资源 */
+export const linkResources = getEntriesByBelong(notionEntries, '资源')
+
+/** @deprecated 使用 materials */
+export const resources = materials
 
 /** 摄影菜单内容：type = photo */
 export const photos = getPhotoEntries(notionEntries)

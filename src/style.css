@@ -131,6 +131,26 @@
     padding-top: 76px;
   }
 
+  .profile-chat-btn {
+    @apply absolute z-10 inline-flex items-center justify-center no-underline text-[14px] font-semibold text-white border-0 cursor-pointer;
+    top: calc(-38px + 96px - 40px);
+    right: 0;
+    height: 40px;
+    padding: 0 18px;
+    background: #111111;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .profile-chat-btn:hover {
+    background: #333333;
+  }
+
+  .profile-chat-btn:active {
+    transform: scale(0.97);
+  }
+
   .home-page .profile-panel {
     padding-left: var(--home-inset);
   }
@@ -245,6 +265,65 @@
     @apply block flex-shrink-0 object-contain;
     width: 18px;
     height: 18px;
+  }
+
+  /* ── WeChat QR Modal ── */
+  .chat-modal-overlay {
+    @apply fixed inset-0 z-[100] flex items-center justify-center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.45);
+    animation: chat-modal-fade-in 0.2s ease;
+  }
+
+  .chat-modal {
+    @apply relative flex flex-col items-center bg-white;
+    width: min(100%, 320px);
+    padding: 32px 28px 28px;
+    border-radius: 16px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+    animation: chat-modal-slide-in 0.22s ease;
+  }
+
+  .chat-modal-close {
+    @apply absolute flex items-center justify-center border-0 cursor-pointer text-muted bg-transparent;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    font-size: 22px;
+    line-height: 1;
+    border-radius: 8px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .chat-modal-close:hover {
+    @apply text-ink bg-[#f0f0f0];
+  }
+
+  .chat-modal-title {
+    @apply text-[16px] font-semibold text-ink m-0 mb-5 tracking-[-0.02em];
+  }
+
+  .chat-modal-qr {
+    @apply block w-full h-auto;
+    max-width: 240px;
+    border-radius: 8px;
+  }
+
+  @keyframes chat-modal-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes chat-modal-slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
 
   /* ── Content Feed ── */
@@ -382,6 +461,66 @@
 
   .work-card-meta {
     @apply text-[13px] text-muted m-0 px-4 pb-4 pt-2 font-normal leading-[1.5];
+  }
+
+  /* ── Resource Groups ── */
+  .resource-groups {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 260px));
+    column-gap: 56px;
+    row-gap: 40px;
+    justify-content: start;
+  }
+
+  .resource-group {
+    @apply min-w-0;
+    padding: 0;
+  }
+
+  .resource-group-title {
+    @apply text-[17px] font-semibold text-ink m-0 mb-4 tracking-[-0.02em];
+  }
+
+  .resource-group-list {
+    @apply flex flex-col gap-2.5;
+  }
+
+  .resource-chip {
+    @apply flex items-center gap-2 min-w-0 no-underline bg-white border border-[#eeeeee] rounded-[12px];
+    padding: 8px 10px;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .resource-chip:hover {
+    @apply border-[#e2e2e2] bg-[#fafafa];
+  }
+
+  .resource-chip-icon-wrap {
+    @apply flex-shrink-0 overflow-hidden bg-[#f7f7f7] rounded-[8px];
+    width: 28px;
+    height: 28px;
+  }
+
+  .resource-chip-icon {
+    @apply w-full h-full object-contain p-1;
+  }
+
+  .resource-chip-icon-fallback {
+    @apply flex items-center justify-center w-full h-full text-[12px] font-semibold text-muted;
+  }
+
+  .resource-chip-title {
+    @apply flex-1 min-w-0 text-[13px] font-semibold text-ink truncate leading-tight;
+  }
+
+  .resource-chip-arrow {
+    @apply flex-shrink-0 text-[13px] text-[#bbbbbb];
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+
+  .resource-chip:hover .resource-chip-arrow {
+    @apply text-muted;
+    transform: translate(1px, -1px);
   }
 
   /* ── Post Detail ── */
@@ -537,6 +676,11 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .resource-groups {
+      grid-template-columns: repeat(2, minmax(0, 260px));
+      column-gap: 40px;
+    }
+
     .feed-grid {
       grid-template-columns: 1fr;
     }
@@ -659,6 +803,13 @@
       padding-top: 56px;
     }
 
+    .profile-chat-btn {
+      top: calc(-28px + 72px - 36px);
+      height: 36px;
+      padding: 0 14px;
+      font-size: 13px;
+    }
+
     .profile-title {
       @apply text-[26px];
     }
@@ -725,6 +876,10 @@
 
     .feed-card-title {
       @apply text-[15px];
+    }
+
+    .resource-groups {
+      grid-template-columns: 1fr;
     }
 
     .work-section {

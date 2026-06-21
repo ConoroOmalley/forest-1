@@ -1,6 +1,29 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted, ref } from 'vue'
 import { blogConfig } from '@/data/posts'
-import { socialLinks } from '@/data/social'
+import { chatLink, socialLinks } from '@/data/social'
+
+const showChatModal = ref(false)
+
+function openChatModal() {
+  showChatModal.value = true
+}
+
+function closeChatModal() {
+  showChatModal.value = false
+}
+
+function onKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape') closeChatModal()
+}
+
+onMounted(() => {
+  window.addEventListener('keydown', onKeydown)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', onKeydown)
+})
 </script>
 
 <template>
@@ -17,6 +40,10 @@ import { socialLinks } from '@/data/social'
     </div>
 
     <div class="profile-panel">
+      <button type="button" class="profile-chat-btn" @click="openChatModal">
+        {{ chatLink.label }}
+      </button>
+
       <div class="profile-avatar-wrap">
         <img
           :src="blogConfig.avatar"
@@ -55,5 +82,27 @@ import { socialLinks } from '@/data/social'
         </div>
       </div>
     </div>
+
+    <Teleport to="body">
+      <div
+        v-if="showChatModal"
+        class="chat-modal-overlay"
+        @click.self="closeChatModal"
+      >
+        <div class="chat-modal" role="dialog" aria-modal="true" aria-labelledby="chat-modal-title">
+          <button type="button" class="chat-modal-close" aria-label="关闭" @click="closeChatModal">
+            ×
+          </button>
+          <p id="chat-modal-title" class="chat-modal-title">{{ chatLink.hint }}</p>
+          <img
+            :src="chatLink.qrCode"
+            alt="微信二维码"
+            class="chat-modal-qr"
+            width="240"
+            height="240"
+          />
+        </div>
+      </div>
+    </Teleport>
   </section>
 </template>

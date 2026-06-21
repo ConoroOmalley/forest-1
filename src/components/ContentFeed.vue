@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import type { NotionEntry } from '@/types/notion'
+import ResourceBoard from '@/components/ResourceBoard.vue'
 import {
   formatTimelineEntryMeta,
   formatTimelineLocation,
   resolveCardMedia,
   resolveEntryLink,
+  resolveResourceCategory,
+  resolveResourceTitle,
   sortEntriesByDateDesc,
 } from '@/lib/notion-mapper'
 
@@ -13,38 +16,51 @@ const props = defineProps<{
   posts: NotionEntry[]
   projects: NotionEntry[]
   books: NotionEntry[]
-  resources: NotionEntry[]
+  materials: NotionEntry[]
+  linkResources: NotionEntry[]
 }>()
 
-type TabKey = 'all' | 'posts' | 'projects' | 'books' | 'resources'
-
-const activeTab = ref<TabKey>('all')
+type TabKey = 'posts' | 'materials' | 'linkResources' | 'projects' | 'books'
 
 const tabs = computed(() => {
-  const result: { key: TabKey; label: string }[] = [{ key: 'all', label: '全部' }]
+  const result: { key: TabKey; label: string }[] = []
   if (props.posts.length) result.push({ key: 'posts', label: '文章' })
+  if (props.materials.length) result.push({ key: 'materials', label: '资料' })
+  if (props.linkResources.length) result.push({ key: 'linkResources', label: '资源' })
   if (props.projects.length) result.push({ key: 'projects', label: '项目' })
   if (props.books.length) result.push({ key: 'books', label: '书籍' })
-  if (props.resources.length) result.push({ key: 'resources', label: '资料' })
   return result
 })
 
+const activeTab = ref<TabKey>('posts')
+
 watch(tabs, (next) => {
   if (!next.some((tab) => tab.key === activeTab.value)) {
-    activeTab.value = 'all'
+    activeTab.value = next[0]?.key ?? 'posts'
   }
-})
+}, { immediate: true })
 
 const filteredEntries = computed(() => {
-  let list: NotionEntry[] = []
-  if (activeTab.value === 'posts') list = props.posts
-  else if (activeTab.value === 'projects') list = props.projects
-  else if (activeTab.value === 'books') list = props.books
-  else if (activeTab.value === 'resources') list = props.resources
-  else list = [...props.posts, ...props.projects, ...props.books, ...props.resources]
-
-  return sortEntriesByDateDesc(list)
+  if (activeTab.value === 'posts') return sortEntriesByDateDesc(props.posts)
+  if (activeTab.value === 'projects') return sortEntriesByDateDesc(props.projects)
+  if (activeTab.value === 'books') return sortEntriesByDateDesc(props.books)
+  if (activeTab.value === 'materials') return sortEntriesByDateDesc(props.materials)
+  return sortEntriesByDateDesc(props.linkResources)
 })
+
+function entryTitle(entry: NotionEntry) {
+  if (entry.type === 'ziyuan' || entry.belong === '资源') {
+    return resolveResourceTitle(entry)
+  }
+  return entry.title
+}
+
+function entryLocation(entry: NotionEntry) {
+  if (entry.type === 'ziyuan' || entry.belong === '资源') {
+    return resolveResourceCategory(entry)
+  }
+  return formatTimelineLocation(entry)
+}
 
 function entryMedia(entry: NotionEntry) {
   return resolveCardMedia(entry)
@@ -69,7 +85,7 @@ function entryLink(entry: NotionEntry) {
     <div class="feed-header">
       <h2 class="feed-title">内容</h2>
       <div class="feed-toolbar">
-        <div v-if="tabs.length > 1" class="feed-tabs" role="tablist">
+        <div v-if="tabs.length" class="feed-tabs" role="tablist">
           <button
             v-for="tab in tabs"
             :key="tab.key"
@@ -86,7 +102,12 @@ function entryLink(entry: NotionEntry) {
       </div>
     </div>
 
-    <ul v-if="filteredEntries.length" class="feed-grid">
+    <ResourceBoard
+      v-if="activeTab === 'linkResources' && filteredEntries.length"
+      :entries="filteredEntries"
+    />
+
+    <ul v-else-if="filteredEntries.length" class="feed-grid">
       <li v-for="entry in filteredEntries" :key="entry.id" class="feed-grid-item">
         <component
           :is="entryLink(entry).external ? 'a' : 'router-link'"
@@ -113,9 +134,9 @@ function entryLink(entry: NotionEntry) {
 
           <div class="feed-card-body">
             <p class="feed-card-meta">{{ formatTimelineEntryMeta(entry) }}</p>
-            <h4 class="feed-card-title">{{ entry.title }}</h4>
-            <p v-if="formatTimelineLocation(entry)" class="feed-card-location">
-              {{ formatTimelineLocation(entry) }}
+            <h4 class="feed-card-title">{{ entryTitle(entry) }}</h4>
+            <p v-if="entryLocation(entry)" class="feed-card-location">
+              {{ entryLocation(entry) }}
             </p>
           </div>
         </component>

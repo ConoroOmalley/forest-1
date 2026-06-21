@@ -24,6 +24,11 @@ const router = createRouter({
       component: () => import('@/pages/Photography.vue'),
     },
     {
+      path: '/resources',
+      name: 'Resources',
+      component: () => import('@/pages/Resources.vue'),
+    },
+    {
       path: '/post/:slug',
       name: 'Post',
       component: () => import('@/pages/Post.vue'),

@@ -8,6 +8,7 @@ export type NotionEntryType =
   | 'SubMenu'
   | 'photo'
   | 'ziliao'
+  | 'ziyuan'
 
 /** Notion 数据库 status 列 */
 export type NotionEntryStatus = 'Published' | 'Invisible' | 'Draft'
